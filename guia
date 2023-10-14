@@ -1,0 +1,67 @@
+
+
+
+<FONT COLOR=#BB00FF><font size="5"><b>aa</font color></font size></b>
+
+# <FONT COLOR=#8B008B>tt</font>
+
+## <FONT COLOR=#007575>**MicroPython**</font>
+Se explican los siguientes aspectos:
+
+
+### <FONT COLOR=#AA0000>3</font>
+
+
+### <FONT COLOR=#AA0000>Programa</font>
+
+El programa lo podemos descargar de:
+
+* [A0x-aaa](../programas/upy/A0x-aaa.hex)
+* [A0x-aaa](../programas/upy/A0x-aaa.py)
+
+## <FONT COLOR=#007575>**MakeCode**</font>
+Se explican los siguientes aspectos:
+
+### <FONT COLOR=#AA0000>Programa</font>
+
+El programa lo podemos descargar de:
+
+* [A0x-aaa](../programas/makecode/microbit-A0x-aaa.hex)
+
+## <FONT COLOR=#007575>**MicroBlocks**</font>
+Se explican los siguientes aspectos:
+
+
+### <FONT COLOR=#AA0000>Programa</font>
+
+
+El programa lo podemos descargar de:
+
+* [A0x-aaa](../programas/ublocks/A0x-aaa.ubp)
+
+<center>
+
+![](../img/actividades/A0x/A0x_y.png)  
+**
+
+</center>
+
+<center>
+
+![aa](../img/actividades/A0x/A0x_nn.png)
+
+*aa*
+
+</center>
+
+<a name="item0B"></a>
+
+[Bloque for](#item1B)
+<br> [Bloque while](#item2B)</br><br>
+[Bloque cada 'nn' ms](#item3B)</br><br>
+[Bloques salir y continuar](#item4B)</br>
+
+[Volver](#item0B)
+<a name="item2B"></a>
+
+<hr width=100%  size=10 noshade="noshade">
