@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+mkdocs = "==1.5.3"
+mkdocs-material = "==9.4.5"
+mkdocs-minify-plugin = "==0.7.1"
+mkdocs-glightbox = "==0.3.4"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+
