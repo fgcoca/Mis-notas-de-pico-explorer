@@ -1,20 +1,17 @@
-# Webgrafía y bibliografía
+# <FONT COLOR=#8B008B>Webgrafía y bibliografía</font>
 
 ***
-* [Wiki de documentación de freecad](https://wiki.freecadweb.org/)
-
-* [Body en Part Design](https://wiki.freecadweb.org/PartDesign_Body)
-  
-* Colección de tutoriales de [Tato3D CAD Tutoriales](https://www.youtube.com/channel/UCvTdlVSgwv1jb1KMyrXrT-A/videos)
-  
-* [Fichas colección de piezas](http://esoytec.blogspot.com/)  
-Indicación de referencia: en estas fichas cada cuadradito mide 10mm de lado.
-
-* [Repositorios de freecad](https://github.com/FreeCAD)
-  
 * [Wikipedia](https://es.wikipedia.org/wiki/Wikipedia:Portada)
 
-* Canal Youtube [Christian Tutoriales CAD](https://www.youtube.com/channel/UCoODgOD6EYwbqDZfnGfDkbw)  
+* [Pimoroni](https://shop.pimoroni.com/)
 
-* Una lección sobre el croquizador de Christoph Blaue traducida por Juan Carlos Ruiz Gómez.
-  
+* Repositorio en Github [Pimoroni Pico](https://github.com/pimoroni/pimoroni-pico)
+
+* [plantilla-taller](https://github.com/lajaqueria/plantilla-taller) desarrollada por Cristobal Contreras para [La Jaquería](https://lajaqueria.org/)
+
+* Hoja de datos de Pico: [Datasheet de Pico](https://datasheets.raspberrypi.org/pico/pico-datasheet.pdf)
+
+* [Freenove Ultimate Starter Kit for Raspberry Pi](https://github.com/Freenove/Freenove_Ultimate_Starter_Kit_for_Raspberry_Pi)
+
+* Guia oficial de Raspberry Pi Pico: Get started with MicroPython on Raspberry Pi Pico
+

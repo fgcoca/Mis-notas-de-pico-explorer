@@ -1,18 +1,54 @@
-# Taller de X
+# <FONT COLOR=#8B008B>Introducción</font>
+La placa **Pico Explorer** es una placa de expansión para la Raspberry Pi Pico o Pico W fabricada por [Pimoroni](https://shop.pimoroni.com/), diseñada para el aprendizaje de circuitos básicos de electrónica mediante la realización de experimentos reales. La placa incluye componentes funcionales como una mini protoboard, controladores de motor, un altavoz, una pantalla con cuatro botones utilizables y conectores de Breakout Garden para módulos de expansión. En la imagen siguiente vemos su aspecto.
 
-TODO: Aquí debe de ir toda la **Descripción del taller**
+<center>
 
-Esta es la lista de tareas que tienes que hacer para poner a punto este taller ¡Ánimo!
+![Aspecto de la placa Pico Explorer](./img/intro/aspecto.png)  
+*Aspecto de la placa Pico Explorer*
 
-* [ ] Vete a `mkdocs.yml` y rellena todos los puntos del 1 al 4. **Borra los comentarios TODO: conforme vayas acabando**
-* [ ] En este fichero, `index.md`, escribe de que va el taller, pon toda la información. **Borra el TODO: cuando acabes**
-* [ ] Guarda una foto chiquitita tuya, típica foto de perfil, en la carpeta `docs/img/`.
-* [ ] Vete a `about.md`, enlaza tu imagen de perfil y rellena tu información personal. **Borra el TODO: cuando acabes**
-* [ ] En la carpeta `docs/instalacion` ve a cada fichero y pon las instrucciones para instalar todo. **Borra el TODO: cuando acabes**
-* [ ] Ahora puedes ir creando tus secciones en carpetas con sus ficheros markdown (acabados en `.md`) y enlazándolos en el punto 5 de `mkdocs.yml`. **Borra el TODO: cuando acabes**
-* [ ] Cuando hayas acabado todo, haz un primer despliegue para ver como se queda online. Para ello ejecuta `pipenv run mkdocs gh-deploy`.
-    * [ ] Si el resultado no te convence, sigue editando lo que te haga falta. Cuando ya estes convencid@, pasa al siguiente punto.
-* [ ] En `mkdocs.yml` comenta las líneas del punto 5 que se refieren a la ayuda. **Borra cada TODO: cuando acabes**
-* [ ] En este fichero borra esta información que no necesitas y comprueba que no te queda ningun TODO: por hacer.
-* [ ] Vuelve a hacer un despliegue ya con el resultado final y comprueba que se quede perfecto.
-* [ ] Recuerda hacer subir todos tus cambios a la rama master con `git commit -am "Mensaje del commit"`.
+</center>
+
+## <FONT COLOR=#007575>**Características**</font>
+
+* Altavoz piezoeléctrico
+* Pantalla LCD IPS de 1,54" (240 x 240px)
+* Cuatro pulsadores controlables por el usuario
+* Dos controladores de motor puente en H (con LED indicador de sobrecorriente)
+* Conectores de pines GPIO y ADC de fácil acceso
+* Dos enchufes I2C Breakout Garden
+* Mini placa protoboard de pruebas
+* Patitas adhesivas de silicona
+* Compatible con Raspberry Pi Pico/Pico W
+* No se requiere soldadura (siempre que la Pico tenga las tiras de pines soldados).
+* Dimensiones: aproximadas 117 mm x 63 mm x 20 mm (largo x ancho x alto)
+* Requiere de [Bibliotecas C/C++ y MicroPython](https://github.com/pimoroni/pimoroni-pico)
+* [Esquemático](./datasheet/pico_explorer_schematic.pdf)
+
+## <FONT COLOR=#007575>**Pinout**</font>
+
+### <FONT COLOR=#AA0000>Raspberry Pi Pico</font>
+
+<center>
+
+![Distribución de pines en la Pi Pico](./img/intro/pinout_pico.png)  
+*Distribución de pines en la Pi Pico*
+
+</center>
+
+### <FONT COLOR=#AA0000>Raspberry Pi Pico</font>
+
+<center>
+
+![Distribución de pines en la Pi Pico W](./img/intro/pinout_picoW.png)  
+*Distribución de pines en la Pi Pico W*
+
+</center>
+
+### <FONT COLOR=#AA0000>Placa Pico Explorer</font>
+
+<center>
+
+![Distribución de pines en la Pico Explorer](./img/intro/pinout_pico_explorer.png)  
+*Distribución de pines en la Pico Explorer*
+
+</center>

@@ -1,17 +1,17 @@
 # 1. Información del Taller
-site_name: Taller de X # TODO:
-site_description: La Jaqueria - Taller de X # TODO:
+site_name: Mis notas de pico explorer
+site_description: Pico Explorer Base es una placa de expansión para la Raspberry Pi Pico o Pico W que permitir realizar diversos experimentos. La placa incluye componentes como una mini protoboard, controladores de motor, cables ADC y GPIO, altavoz, pantalla con cuatro pulsadores, interruptores y conectores de Breakout Garden para el módulo de expansión.
 site_author: Federico Coca
-site_url: https://fgcoca.github.io/....
+site_url: https://fgcoca.github.io/Mis-notas-de-pico-explorer/
 
 # 2. Repositorio
-repo_name: fgcoca/Simulacion-de-circuitos-electronicos
-repo_url: https://github.com/fgcoca/Simulacion-de-circuitos-electronicos
+repo_name: fgcoca/Mis-notas-de-pico-explorer
+repo_url: https://github.com/fgcoca/Mis-notas-de-pico-explorer
 edit_uri: ""
 
 
 # 3. Footer
-copyright: Copyright &copy; 2020 - 2025 Federico Coca
+copyright: Copyright &copy; 2023 - 2035 Federico Coca
 extra:
   # Footer - No poner que está hecho con MkDocs
   generator: false
@@ -32,7 +32,12 @@ extra:
 
 # 4. Navegación
 nav:
-  - Introducción: index.md # TODO:
+  - Introducción:
+    - La placa Pico Explorer: index.md
+    - Como comenzar: inicio/inicio.md
+  - MicroPython:
+    - Inicio con Raspberry Pi Pico: up/inicio_pi_pico.md
+    - Firmaware y software: up/firm_soft.md
   # Aqui todas las entradas
   - Miscelanea:
     - Autor: Miscelanea/about.md 
@@ -54,7 +59,7 @@ theme:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       toggle:
-        icon: material/toggle-switch
+        icon: material/lightbulb 
         name: Modo Oscuro
       primary: light blue
       accent: deep purple 
@@ -62,18 +67,25 @@ theme:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       toggle:
-        icon: material/toggle-switch-off-outline
+        icon: material/lightbulb-outline
         name: Modo Claro
       primary: light blue
       accent: deep purple
-# Fuente
-font:
-  text: Roboto 
-  code: Roboto Mono 
-# Lenguage
-language: es
-logo: img/favicon.png 
-favicon: img/favicon.png 
+  # Fuente
+  font:
+    text: Roboto 
+    code: Roboto Mono 
+  # Lenguage
+  language: es
+  logo: img/favicon.png 
+  favicon: img/favicon.png 
+  # Icono del repo
+  icon:
+    repo: fontawesome/brands/github
+  # Pestañas de navegación
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky #pestañas fijas
 # Caracteristicas especiales
 features:
     - navigation.instant
@@ -88,9 +100,7 @@ features:
     - search.suggest
     - search.highlight
     - search.share
-# Icono del repo
-icon:
-    repo: fontawesome/brands/github
+
 # 7. Extensiones
 markdown_extensions:
   # Python Markdown
@@ -138,7 +148,7 @@ extra_javascript:
 # 9. Plugins
 plugins:
   - search:
-      lang: es
+      lang: es, en
       separator: '[\s\-,:!=\[\]()"/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - glightbox:
       touchNavigation: true
