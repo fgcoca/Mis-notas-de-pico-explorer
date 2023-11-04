@@ -13,5 +13,12 @@
 
 * [Freenove Ultimate Starter Kit for Raspberry Pi](https://github.com/Freenove/Freenove_Ultimate_Starter_Kit_for_Raspberry_Pi)
 
-* Guia oficial de Raspberry Pi Pico: Get started with MicroPython on Raspberry Pi Pico
+* [El Libro De Python](https://ellibrodepython.com/)
 
+* Guia oficial de Raspberry Pi Pico: [Get started with MicroPython on Raspberry Pi Pico](https://hackspace.raspberrypi.com/books/micropython-pico)
+
+* [Raspberry Pi Pico Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf)
+
+* [Blog original no oficial de Raspberry Pi](https://www.raspberrypi-spy.co.uk/)
+
+* [Documentación de Raspberry Pi](https://www.raspberrypi.com/documentation/microcontrollers/)

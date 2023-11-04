@@ -24,7 +24,7 @@ La placa **Pico Explorer** es una placa de expansión para la Raspberry Pi Pico 
 * Requiere de [Bibliotecas C/C++ y MicroPython](https://github.com/pimoroni/pimoroni-pico)
 * [Esquemático](./datasheet/pico_explorer_schematic.pdf)
 
-## <FONT COLOR=#007575>**Pinout**</font>
+## <FONT COLOR=#007575>**Pinouts**</font>
 
 ### <FONT COLOR=#AA0000>Raspberry Pi Pico</font>
 
@@ -35,7 +35,7 @@ La placa **Pico Explorer** es una placa de expansión para la Raspberry Pi Pico 
 
 </center>
 
-### <FONT COLOR=#AA0000>Raspberry Pi Pico</font>
+### <FONT COLOR=#AA0000>Raspberry Pi Pico W</font>
 
 <center>
 
@@ -52,3 +52,25 @@ La placa **Pico Explorer** es una placa de expansión para la Raspberry Pi Pico 
 *Distribución de pines en la Pico Explorer*
 
 </center>
+
+## <FONT COLOR=#007575>**Pinout desde la línea de comandos**</font>
+Voy a exponer a título de curiosidad el trabajo visto en el [blog original no oficial de Raspberry Pi](https://www.raspberrypi-spy.co.uk/) de [Matt Hawkins](https://mastodon.social/@RPiSpy) donde podemos encontrar un script .sh que no dibuja el pinout de la Pi Pico en una ventana de terminal cuando lo invocamos. La web es muy recomendable por la cantidad de información y ejemplos que desarrolla con la Pi Pico.
+
+El script lo podemos descargar desde:
+
+* wget https://raw.githubusercontent.com/RPiSpy/pi-pico/main/picopins.sh
+* git clone https://github.com/RPiSpy/pi-pico.git
+* [Este enlace](./programas/picopins.sh)
+
+Una vez descargado nos dirigimos al directorio donde está el archivo y hacemos que el script sea ejecutable mediante ```chmod +x piconpins.sh```.
+
+Ya podemos ejecutar el script tecleando en la línea de comandos ```./piconpins.sh``` o ```sh piconpins.sh``` para obtener el siguiente resultado:
+
+<center>
+
+![Pinout de la Pi Pico desde la línea de comandos](./img/intro/pinout_shell.png)  
+*Pinout de la Pi Pico desde la línea de comandos*
+
+</center>
+
+Si queremos tener disponible el script lo podemos llevar al directorio de sistema /bin. En mi caso le voy a cambiar el nombre a pinoutpico haciendo ```sudo cp picopins.sh /bin/pinoutpico```. El nuevo fichero también debe tener permiso de ejecución, por lo que debemos dirigirnos al directorio /bin y en una terminal teclear ```sudo chmod +x pinoutpico```. Ahora ya podemos invocar ```pinoutpico``` desde cualquier directorio siempre que lo necesitemos.

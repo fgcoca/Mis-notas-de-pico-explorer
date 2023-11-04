@@ -20,3 +20,5 @@
 * Retoque de imágenes [GIMP](https://www.gimp.org/)
 
 * Generador de tablas para Markdown [Tables Generator](https://www.tablesgenerator.com/markdown_tables#)
+
+* Editor de Python [Thonny](https://thonny.org/)
