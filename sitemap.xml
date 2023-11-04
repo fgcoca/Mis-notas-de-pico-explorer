@@ -2,42 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/Miscelanea/about/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/Miscelanea/lic/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/Miscelanea/soft/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/Miscelanea/webgrafia/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/actividades/A01/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/actividades/estructura/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/guias/control/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/guias/datos/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/guias/intro/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/guias/operaradores/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/guias/permisos/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/guias/poo/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/guias/sintaxis/</loc>
+         <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/inicio/inicio/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/up/firm_soft/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/inicio/inicio_pi_pico/</loc>
+         <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/up/inicio_pi_pico/</loc>
-         <lastmod>2023-10-16</lastmod>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/inicio/pi_pico_picoW/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/up/firm/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/up/soft/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/upy/rapida/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://fgcoca.github.io/Mis-notas-de-pico-explorer/upy/ref_clases/</loc>
+         <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

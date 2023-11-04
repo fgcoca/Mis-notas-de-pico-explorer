@@ -1,0 +1,1696 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Pico Explorer Base es una placa de expansión para la Raspberry Pi Pico o Pico W que permitir realizar diversos experimentos. La placa incluye componentes como una mini protoboard, controladores de motor, cables ADC y GPIO, altavoz, pantalla con cuatro pulsadores, interruptores y conectores de Breakout Garden para el módulo de expansión.">
+      
+      
+        <meta name="author" content="Federico Coca">
+      
+      
+        <link rel="canonical" href="https://fgcoca.github.io/Mis-notas-de-pico-explorer/up/soft/">
+      
+      
+        <link rel="prev" href="../firm/">
+      
+      
+        <link rel="next" href="../../guias/intro/">
+      
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
+    
+    
+      
+        <title>Software Thonny - Mis notas de pico explorer</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6a10b989.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="deep-purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#software-thonny" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Mis notas de pico explorer" class="md-header__button md-logo" aria-label="Mis notas de pico explorer" data-md-component="logo">
+      
+  <img src="../../img/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mis notas de pico explorer
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Software Thonny
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="deep-purple"  aria-label="Modo Oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Oscuro" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="deep-purple"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fgcoca/Mis-notas-de-pico-explorer" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fgcoca/Mis-notas-de-pico-explorer
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Introducción
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../firm/" class="md-tabs__link">
+          
+  
+  Firmware y software
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guias/intro/" class="md-tabs__link">
+          
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../upy/rapida/" class="md-tabs__link">
+          
+  
+  MicroPython
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../actividades/estructura/" class="md-tabs__link">
+          
+  
+  Actividades
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Miscelanea/about/" class="md-tabs__link">
+          
+  
+  Miscelanea
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Mis notas de pico explorer" class="md-nav__button md-logo" aria-label="Mis notas de pico explorer" data-md-component="logo">
+      
+  <img src="../../img/favicon.png" alt="logo">
+
+    </a>
+    Mis notas de pico explorer
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fgcoca/Mis-notas-de-pico-explorer" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fgcoca/Mis-notas-de-pico-explorer
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducción
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa Pico Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/inicio_pi_pico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio con Raspberry Pi Pico
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/pi_pico_picoW/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La Pi Pico y Pico W
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/inicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Como comenzar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Firmware y software
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Firmware y software
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../firm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firmware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Software Thonny
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Software Thonny
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalar-thonny" class="md-nav__link">
+    Instalar Thonny
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-del-ide-de-thonny" class="md-nav__link">
+    Descripción del IDE de Thonny
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-basica-de-thonny" class="md-nav__link">
+    Configuración básica de Thonny
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración básica de Thonny">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interprete" class="md-nav__link">
+    Intérprete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor" class="md-nav__link">
+    Editor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temas-y-fuentes" class="md-nav__link">
+    Temas y fuentes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejecutar-y-depurar" class="md-nav__link">
+    Ejecutar y depurar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terminal" class="md-nav__link">
+    Terminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consola" class="md-nav__link">
+    Consola
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asistente" class="md-nav__link">
+    Asistente
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos-con-thonny" class="md-nav__link">
+    Primeros pasos con Thonny
+  </a>
+  
+    <nav class="md-nav" aria-label="Primeros pasos con Thonny">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionamiento-en-linea" class="md-nav__link">
+    Funcionamiento en línea
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcionamiento-sin-conexion" class="md-nav__link">
+    Funcionamiento sin conexión
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecutando-codigo" class="md-nav__link">
+    Ejecutando código
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/permisos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permisos en Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/sintaxis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sintaxis en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datos en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/operaradores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operadores en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programacion Orientada a Objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    MicroPython
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MicroPython
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../upy/rapida/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de refencia rápida de RP2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../upy/ref_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Referencias a clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Actividades
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Actividades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/estructura/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructura
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Miscelanea
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Miscelanea
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/lic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licencias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/webgrafia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Webgrafia/Bibliografía
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/soft/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software utilizado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalar-thonny" class="md-nav__link">
+    Instalar Thonny
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-del-ide-de-thonny" class="md-nav__link">
+    Descripción del IDE de Thonny
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-basica-de-thonny" class="md-nav__link">
+    Configuración básica de Thonny
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración básica de Thonny">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interprete" class="md-nav__link">
+    Intérprete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor" class="md-nav__link">
+    Editor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temas-y-fuentes" class="md-nav__link">
+    Temas y fuentes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejecutar-y-depurar" class="md-nav__link">
+    Ejecutar y depurar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terminal" class="md-nav__link">
+    Terminal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consola" class="md-nav__link">
+    Consola
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asistente" class="md-nav__link">
+    Asistente
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primeros-pasos-con-thonny" class="md-nav__link">
+    Primeros pasos con Thonny
+  </a>
+  
+    <nav class="md-nav" aria-label="Primeros pasos con Thonny">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionamiento-en-linea" class="md-nav__link">
+    Funcionamiento en línea
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcionamiento-sin-conexion" class="md-nav__link">
+    Funcionamiento sin conexión
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecutando-codigo" class="md-nav__link">
+    Ejecutando código
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="software-thonny"><FONT COLOR=#8B008B>Software Thonny</font><a class="headerlink" href="#software-thonny" title="Permanent link">&para;</a></h1>
+<p>Thonny es un sencillo editor gráfico para aprender Python siendo un principiante en el tema.</p>
+<h2 id="instalar-thonny"><FONT COLOR=#007575><strong>Instalar Thonny</strong></font><a class="headerlink" href="#instalar-thonny" title="Permanent link">&para;</a></h2>
+<p>Thonny es un IDE (Integrated Development Environment o entorno de desarrollo integrado) de Python y es el software que utilizaremos para programar la Pico.</p>
+<p>Si trabajamos desde un Raspberry Pi es muy probable que ya tengamos Thonny instalado y tan solo tengamos que actualizar a la versión mas reciente para disponer de las opciones específicas de Pico. Abrimos una terminal, por ejemplo con Ctrl+Alt+T y escribimos:</p>
+<p><code>sudo apt update &amp;&amp; sudo apt upgrade -y</code></p>
+<p>y presionamos Enter para que se ejecute.</p>
+<p>Si estamos trabajando en un ordenador, las versiones disponibles para Linux, Mac o Windows están <a href="https://thonny.org/">aquí</a> listas para descargar e instalar.</p>
+<p>En el caso de Ubunto lo tenemos disponible en la tienda Snap a través de Ubuntu Software.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/Thonny_snap.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Thonny en la tienda Snap" src="../../img/up/Thonny_snap.png" /></a><br />
+<em>Thonny en la tienda Snap</em></p>
+<p></center></p>
+<p>Una vez instalado lo ejecutamos y veremos la ventana siguiente:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/IDE_Thonny.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="IDE de Thonny" src="../../img/up/IDE_Thonny.png" /></a><br />
+<em>IDE de Thonny</em></p>
+<p></center></p>
+<p>Pero seguro que instalando desde las distribuciones de paquetes o tienda Snap no obtenemos la última versión. Si queremos instalar esta última versión en Ubuntu 22.04 debemos visitar el <a href="https://github.com/thonny/thonny/releases/">repositorio de versiones de Thonny</a> y descargar el archivo .bash de la versión que queramos.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/releases_Thonny.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Repo de versiones de Thonny" src="../../img/up/releases_Thonny.png" /></a><br />
+<em>Repo de versiones de Thonny</em></p>
+<p></center></p>
+<p>Abrimos una terminal en el directorio donde tengamos el archivo descargado, thonny-4.1.3.bash en este caso, y tecleamos:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/corre_bash_Thonny.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejecutamos thonny-4.1.3.bash" src="../../img/up/corre_bash_Thonny.png" /></a><br />
+<em>Ejecutamos thonny-4.1.3.bash</em></p>
+<p></center></p>
+<p>Una vez finalizadas todas las tareas tenemos Thonny listo para ejecutar.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/bash_instalado_Thonny.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Thonny-4.1.3.bash instalado" src="../../img/up/bash_instalado_Thonny.png" /></a><br />
+<em>Thonny-4.1.3.bash instalado</em></p>
+<p></center></p>
+<p>Ya estamos listos para ejecutar la versión de Thonny, que en este caso se distingue porque aparece una banderita de Ucrania que permite solidarizarse con el pais.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/IDE_Thonny_4_1_3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="IDE Thonny-4.1.3" src="../../img/up/IDE_Thonny_4_1_3.png" /></a><br />
+<em>IDE Thonny-4.1.3</em></p>
+<p></center></p>
+<h2 id="descripcion-del-ide-de-thonny"><FONT COLOR=#007575><strong>Descripción del IDE de Thonny</strong></font><a class="headerlink" href="#descripcion-del-ide-de-thonny" title="Permanent link">&para;</a></h2>
+<p>Una vez instalado, la primera vez que abrimos el programa se muestra la ventana que vemos a continuación.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/zonas_IDE_Thonny_4_1_3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Partes del IDE Thonny-4.1.3" src="../../img/up/zonas_IDE_Thonny_4_1_3.png" /></a><br />
+<em>Partes del IDE Thonny-4.1.3</em></p>
+<p></center></p>
+<p>A continuación realizamos una breve descripción de las partes numeradas:</p>
+<ol>
+<li>Barra de título, donde vemos el nombre del programa y el nombre del archivo actual que por defecto es <sin nombre>.</li>
+<li>Barra de menús, que nos da acceso a todas las partes de Thonny.</li>
+<li>Barra de herramientas, con accesos rápidos a las tareas habituales.</li>
+<li>Editor, donde se escribe el código de nuestra aplicación. Es una pestaña con el nombre del archivo y pueden coexistir varias pestañas, lo que permite tener varios archivos abiertos y cambiar rapidamente de uno a otro con tan solo hacer clic en la pestaña.</li>
+<li>Intérprete de comandos o consola, desde donde interactuar con nuestro ordenador. En realidad esta zona se denomina REPL (Read, Evaluate, Print y Loop) que traducido sería <strong><a href="https://es.wikipedia.org/wiki/REPL">bucle Lectura-Evaluación-Impresión</a></strong>. Esto viene a significar algo así como "lee lo escrito, evalúa el código escrito, imprime los resultados y vuelve a empezar".</li>
+<li>Barra de estado, donde indica con que Python está trabajando y nos da acceso a la configuración del intérprete.</li>
+</ol>
+<p>Desde el menú "Visualizar" se pueden activar y desactivar las herramientas de Thonny. A Continuación vemos este menú desplegado. Activar (o desactivar si ya está activa) una herramienta es hacer clic sobre su nombre en este menú.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/menu_visualizar.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Menú Visualizar" src="../../img/up/menu_visualizar.png" /></a><br />
+<em>Menú Visualizar</em></p>
+<p></center></p>
+<p>Describimos brevemente estas herramientas.</p>
+<ul>
+<li>Archivos (Árbol de archivos). Especialmente útil cuando trabajamos en proyectos con varios archivos.</li>
+<li>Asistente. Un ayudante del editor Python que nos guiará en los problemas en la ejecución o al implementar la aplicación.</li>
+<li>Ayuda. Ayuda sobre el uso de la aplicación, del depurador, etc.</li>
+<li>Esquema. Es un árbol con todas las funciones, objetos y métodos definidos en nuestra aplicación. Es como un vistazo general a la aplicación que nos permite movernos con rapidez por la misma. Simplemente cuando hacemos clic en un método, función o clase, nos desplazamos a ella.</li>
+<li>Excepción. Es donde se muestran los errores, cuando los hay.</li>
+<li>Inspector de objetos. Permite examinar las variables que se muestran tanto en heap como en Variables.</li>
+<li>Montículo (heap). Cuando lo activamos podemos ver el valor de las variables.</li>
+<li>Notas. Para tener un lugar donde hacer anotaciones y tenerlas siempre a mano. Lo que escribamos aquí se guar de manera automática y se carga en el siguiente arranque de Thonny.</li>
+<li>PORHACER. Visualiza las etiquetas #TODO que hemos puesto como aviso de que la tarea está pendiente.</li>
+<li>Pila (stack). Nos da una visión de la parte de la aplicación en la que nos encontramos en tiempo de ejecución.</li>
+<li>Variables. Nos permite identificar, en tiempo de ejecución, cada una de las variables de nuestra aplicación. Si tenemos activado el heap lo que se muestra es el identificador de la variable, mientras que si no está activado heap veremos el valor de la variable.</li>
+<li>Árbol del programa. Es otra visión o punto de vista del programa que permite analizar el funcionamiento del mismo de una manera totalmente diferente.</li>
+</ul>
+<h2 id="configuracion-basica-de-thonny"><FONT COLOR=#007575><strong>Configuración básica de Thonny</strong></font><a class="headerlink" href="#configuracion-basica-de-thonny" title="Permanent link">&para;</a></h2>
+<p>Thonny es fácil de configurar dada lo básica que es la misma. Podemos acceder a la configuración o bien desde el menú <em>Herramientas</em> o bien desde la parte inferior derecha de la ventana. En este último caso se abrirá la ventana en la pestaña <em>Interprete</em>.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/acceso_conf.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Acceso a la ventana de configuración" src="../../img/up/acceso_conf.png" /></a><br />
+<em>Acceso a la ventana de configuración</em></p>
+<p></center></p>
+<h3 id="general"><FONT COLOR=#AA0000>General</font><a class="headerlink" href="#general" title="Permanent link">&para;</a></h3>
+<p>En esta pestaña se configuran aspecto generales de la aplicación, como la posibilidad de lanzar varias instancias de Thonny, reabrir todos los archivos de la última sesión o configurar el idioma.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/pest_general.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pestaña General" src="../../img/up/pest_general.png" /></a><br />
+<em>Pestaña General</em></p>
+<p></center></p>
+<h3 id="interprete"><FONT COLOR=#AA0000>Intérprete</font><a class="headerlink" href="#interprete" title="Permanent link">&para;</a></h3>
+<p>Thonny permite seleccionar diferentes intérpretes, es decir, diferentes versiones de Python. Como regla regla general, se utiliza el mismo intérprete que el que ejecuta Thonny. Sin embargo, en nuestro caso, usaremos un intérprete concreto. Necesitamos tener seleccionado 'MicroPython (Raspberry Pi Pico)' como intérprete de Python; esto se puede hacer clicando en el cuadro en la parte inferior derecha. Thonny puede ofrecernos instalar MicroPython, pero no necesitamos hacerlo ya que ya tenemos la variante de MicroPython que necesitamos instalada. Teniendo las Pi Pico conectada a un puerto USB esta acción nos devolverá algo similar a la imagen siguiente:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/sel_interp.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Selección del Intérprete" src="../../img/up/sel_interp.png" /></a><br />
+<em>Selección del Intérprete</em></p>
+<p></center></p>
+<p>Tras la selección Thonny muestra el siguiente aspecto:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/pos_sel_interp.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Thonny tras la selección del Intérprete" src="../../img/up/pos_sel_interp.png" /></a><br />
+<em>Thonny tras la selección del Intérprete</em></p>
+<p></center></p>
+<p>Si no vemos la ventana como la de arriba, podemos probar a hacer clic en el botón rojo de detener para interrumpir cualquier proceso que se esté ejecutando.</p>
+<p>Si Thonny tiene problemas para la detección automática la podemos seleccionar manualmente desde la pestaña de configuración <em>Intérprete</em>, desde donde podremos seleccionar la placa y el puerto de forma correcta.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/pest_interp.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pestaña Intérprete" src="../../img/up/pest_interp.png" /></a><br />
+<em>Pestaña Intérprete</em></p>
+<p></center></p>
+<h3 id="editor"><FONT COLOR=#AA0000>Editor</font><a class="headerlink" href="#editor" title="Permanent link">&para;</a></h3>
+<p>En esta pestaña podemos seleccionar diferentes opciones que nos ayudarán en nuestro día a día programando.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/pest_Editor.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pestaña Editor" src="../../img/up/pest_Editor.png" /></a><br />
+<em>Pestaña Editor</em></p>
+<p></center></p>
+<h3 id="temas-y-fuentes"><FONT COLOR=#AA0000>Temas y fuentes</font><a class="headerlink" href="#temas-y-fuentes" title="Permanent link">&para;</a></h3>
+<p>Esta pestaña está orientada a cambiar el aspecto estético de la aplicación según nuestras preferencias.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/pest_Temas_fuentes.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pestaña Temas y fuentes" src="../../img/up/pest_Temas_fuentes.png" /></a><br />
+<em>Pestaña Temas y fuentes</em></p>
+<p></center></p>
+<h3 id="ejecutar-y-depurar"><FONT COLOR=#AA0000>Ejecutar y depurar</font><a class="headerlink" href="#ejecutar-y-depurar" title="Permanent link">&para;</a></h3>
+<p>Para configurar una serie de ayudas que mejorean el funcionamiento y permiten trabajar mas comodamente, como por ejemplo la de abrir y cerrar el <em>Stack</em> automáticamente.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/pest_Ejecutar_depurar.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pestaña Ejecutar y depurar" src="../../img/up/pest_Ejecutar_depurar.png" /></a><br />
+<em>Pestaña Ejecutar y depurar</em></p>
+<p></center></p>
+<h3 id="terminal"><FONT COLOR=#AA0000>Terminal</font><a class="headerlink" href="#terminal" title="Permanent link">&para;</a></h3>
+<p>En esta pestaña podemos configurar las opciones del terminal.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/pest_Terminal.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pestaña Terminal" src="../../img/up/pest_Terminal.png" /></a><br />
+<em>Pestaña Terminal</em></p>
+<p></center></p>
+<h3 id="consola"><FONT COLOR=#AA0000>Consola</font><a class="headerlink" href="#consola" title="Permanent link">&para;</a></h3>
+<p>En esta pestaña podemos configurar las opciones referentes al comportamiento al terminar un proceso o una aplicación.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/pest_Consola.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pestaña Consola" src="../../img/up/pest_Consola.png" /></a><br />
+<em>Pestaña Consola</em></p>
+<p></center></p>
+<h3 id="asistente"><FONT COLOR=#AA0000>Asistente</font><a class="headerlink" href="#asistente" title="Permanent link">&para;</a></h3>
+<p>En esta pestaña quizá la opción mas interesante sea la de habilitar o deshabilitar la apertura del asistente, de forma automática, cuando se produce un error en el programa. También es interesante activar este comportamiento para los <em>warning</em>.
+<center></p>
+<p><a class="glightbox" href="../../img/up/pest_Asistente.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pestaña Asistente" src="../../img/up/pest_Asistente.png" /></a><br />
+<em>Pestaña Asistente</em></p>
+<p></center></p>
+<h2 id="primeros-pasos-con-thonny"><FONT COLOR=#007575><strong>Primeros pasos con Thonny</strong></font><a class="headerlink" href="#primeros-pasos-con-thonny" title="Permanent link">&para;</a></h2>
+<p>Conectamos la Pi Pico con el firmware grabado al ordenador mediante un cable USB, arrancamos Thonny y hacemos clic en el 'Shell' o consola, obtendremos un cursor parpadeante. Escribiendo instrucciones en este cuadro damos órdenes a la Pico directamente, una orden cada vez (esto se llama REPL, o Read-Eval-Print Loop). En la animación siguiente vemos su funcionamiento.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/hola_consola.gif" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ordenes en la consola (REPL)" src="../../img/up/hola_consola.gif" /></a><br />
+<em>Ordenes en la consola (REPL)</em></p>
+<p></center></p>
+<p>Pero tal vez lo que queramos sea poner mas de una línea de instrucciones para componer un programa y que al ejecutarlo se realicen las acciones programadas. Esto lo hacemos en la ventana de programa, como por ejemplo en la animación siguiente:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/programa_simple.gif" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Programa básico" src="../../img/up/programa_simple.gif" /></a><br />
+<em>Programa básico</em></p>
+<p></center></p>
+<h3 id="funcionamiento-en-linea"><FONT COLOR=#AA0000>Funcionamiento en línea</font><a class="headerlink" href="#funcionamiento-en-linea" title="Permanent link">&para;</a></h3>
+<p>Podemos trabajar con la Raspberry Pi Pico en línea o conectada para compilar o depurar programas, pero es necesario tenerla conectada al ordenador.</p>
+<p>Las ventajas que esto no ofrece son:</p>
+<ul>
+<li>Podemos utilizar Thonny para compilar o depurar programas.</li>
+<li>A través de la ventana "Shell", obtenemos la información de errores y los resultados de salida generados durante la ejecución del programa. También es posible consultar información de funciones para ayudar a mejorar el programa.</li>
+</ul>
+<p>Las desventajas son:</p>
+<ul>
+<li>Para trabajar en línea la Raspberry Pi Pico tiene que estar conectada a un ordenador y ejecutar con Thonny.</li>
+<li>Si la Raspberry Pi Pico se desconecta del ordenador, el programa no se ejecutará de nuevo cuando se vuelve a conectar la Pi Pico.</li>
+</ul>
+<p>Partimos de Thonny reciente abierto y lo primero que hacemos es localizar un proyecto para abrirlo o bien crear uno nuevo. El proceso de apertura es el de la animación siguiente:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/abrir_programa_simple.gif" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Abrir un programa desde Thonny" src="../../img/up/abrir_programa_simple.gif" /></a><br />
+<em>Abrir un programa desde Thonny</em></p>
+<p></center></p>
+<p>En la animación observamos lo fácil que es abrir el archivo y ejecutarlo haciendo clic en el botón <strong><em>Ejecutar el script actual</em></strong> o pulsando <strong><em>F5</em></strong>. Cuando estamos en modo de ejecute en línea, podemos hacer clic en <strong><em>Detener/Reiniciar el backend</em></strong> en Thonny o pulsar <strong><em>Ctrl+C</em></strong> para salir del programa. Esta acción límpia el contenido de la consola al igual que la combinación de teclas <strong><em>Ctrl+L</em></strong>.</p>
+<h3 id="funcionamiento-sin-conexion"><FONT COLOR=#AA0000>Funcionamiento sin conexión</font><a class="headerlink" href="#funcionamiento-sin-conexion" title="Permanent link">&para;</a></h3>
+<p>La Raspberry Pi Pico no necesita estar conectada al ordenador y a Thonny para ejecutar los programas almacenados en <strong><em>main.py</em></strong> en el dispositivo una vez que lo alimentemos.</p>
+<p>La ventaja es que se pueden ejecutar programas cuando se enciende sin conectarse a la computadora y Thonny.</p>
+<p>La desventaja es que el programa se detendrá automáticamente cuando se produzca un error o la Raspberry Pi Pico se quede sin energía. En esta situación el código no se puede cambiar fácilmente.</p>
+<p>Cuando se alimenta, la Raspberry Pi Pico comprobará automáticamente si existe <strong><em>main.py</em></strong> en el dispositivo. Si está presente, ejecuta los programas en <strong><em>main.py</em></strong> y luego entra en el modo de comandos del shell. Es decir, si queremos que nuestro programa se ejecute offline basta con guardarlo con el nombre <strong><em>main.py</em></strong>. Si <strong><em>main.py</em></strong> no existe, el sistema entrará en el modo de comandos shell directamente.</p>
+<p><a name="ejecutar"></a></p>
+<h2 id="ejecutando-codigo"><FONT COLOR=#007575><strong>Ejecutando código</strong></font><a class="headerlink" href="#ejecutando-codigo" title="Permanent link">&para;</a></h2>
+<p>Con la Pi Pico conectada al ordenador podemos hacer clic sobre el botón ejecutar y ver como parpadea el LED en la placa y la información que se muestra en la consola.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/run_programa_Thonny.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejecutar un programa desde Thonny" src="../../img/up/run_programa_Thonny.png" /></a><br />
+<em>Ejecutar un programa desde Thonny</em></p>
+<p></center></p>
+<p>Si ahora hacemos clic en el botón de parada/reinicio el programa se detiene, el LED se apaga y se muestra información en la consola.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/stop_programa_Thonny.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Detener un programa desde Thonny" src="../../img/up/stop_programa_Thonny.png" /></a><br />
+<em>Detener un programa desde Thonny</em></p>
+<p></center></p>
+<p>De esta forma estamos ejecutando código online o en conexión. Si ahora desconectamos el cable USB del ordenador, Thonny nos va a mostrar el siguiente mensaje:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/conex_perdida.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Conexión perdida" src="../../img/up/conex_perdida.png" /></a><br />
+<em>Conexión perdida</em></p>
+<p></center></p>
+<p>Ahora volvemos a conectar el cable USB y recuperamos la conexión haciendo clic en el botón STOP. En esta situación hacemos clic derecho sobre el nombre del archivo A01.py y escogemos la opción <strong><em>Subir a /</em></strong> para grabar el programa en la Pi Pico.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/subir_a.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Subir a /" src="../../img/up/subir_a.png" /></a><br />
+<em>Subir a /</em></p>
+<p></center></p>
+<p>Podemos observar como ahora hay un archivo en la Pi Pico con el mismo nombre que el que teniamos en el IDE de Thonny.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/subido_a.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Archivo subido a la Pi Pico" src="../../img/up/subido_a.png" /></a><br />
+<em>Archivo subido a la Pi Pico</em></p>
+<p></center></p>
+<p>Pero este archivo por si solo no puede ejecutarse en la Pi Pico ya que el interprete MicroPython que contiene espera un archivo <code>main.py</code>. Lo que vamos a hacer es <a href="../../programas/main/main.py">descargar el archivo main.py</a>, que está en un directorio del mismo nombre, y lo copiamos en el directorio de A01. Simplemente indicar por ahora que desde MicroPython se invoca la ejecución de este archivo main.py. Una vez copiado el archivo al directorio lo llevamos a la Pico de la misma forma que antes. Tendremos la siguiente situación:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/main_subido_a.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Archivo main.py subido a la Pi Pico" src="../../img/up/main_subido_a.png" /></a><br />
+<em>Archivo main.py subido a la Pi Pico</em></p>
+<p></center></p>
+<p>Desconectamos el cable USB y lo volvemos a conectar. El LED en la pico parpadea según el programa A01.py mientras que Thonny se muestra como vemos a continuación:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/ejecucion_offline.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejecución desde la Raspberry Pi Pico" src="../../img/up/ejecucion_offline.png" /></a><br />
+<em>Ejecución desde la Raspberry Pi Pico</em></p>
+<p></center></p>
+<p>El código se está ejecutando sin conexión (offline) entre Thonny y la Pico. Si queremos volver a tomar el control desde Thonny basta con hacer clic en el botón STOP y se mostrará la ventana siguiente:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/vuelta_online.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Vuelta al modo online" src="../../img/up/vuelta_online.png" /></a><br />
+<em>Vuelta al modo online</em></p>
+<p></center></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 - 2035 Federico Coca
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://x.com/fgcoca" target="_blank" rel="noopener" title="X de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/fgcoca" target="_blank" rel="noopener" title="Github de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.instagram.com/cocafederico/?hl=es" target="_blank" rel="noopener" title="Instagram de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://x.com/clubroboticagra" target="_blank" rel="noopener" title="X de Club Robótica Granada" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="../../plugins/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
