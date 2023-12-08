@@ -1,0 +1,2379 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Pico Explorer Base es una placa de expansión para la Raspberry Pi Pico o Pico W que permitir realizar diversos experimentos. La placa incluye componentes como una mini protoboard, controladores de motor, cables ADC y GPIO, altavoz, pantalla con cuatro pulsadores, interruptores y conectores de Breakout Garden para el módulo de expansión.">
+      
+      
+        <meta name="author" content="Federico Coca">
+      
+      
+        <link rel="canonical" href="https://fgcoca.github.io/Mis-notas-de-pico-explorer/guias/estr_datos/">
+      
+      
+        <link rel="prev" href="../datos/">
+      
+      
+        <link rel="next" href="../operaradores/">
+      
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
+    
+    
+      
+        <title>Estructuras de datos en Python - Mis notas de pico explorer</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6a10b989.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="deep-purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#estructuras-de-datos-en-python" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Mis notas de pico explorer" class="md-header__button md-logo" aria-label="Mis notas de pico explorer" data-md-component="logo">
+      
+  <img src="../../img/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mis notas de pico explorer
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Estructuras de datos en Python
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="deep-purple"  aria-label="Modo Oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Oscuro" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="deep-purple"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fgcoca/Mis-notas-de-pico-explorer" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fgcoca/Mis-notas-de-pico-explorer
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Introducción
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../up/firm/" class="md-tabs__link">
+          
+  
+  Firmware y software
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../intro/" class="md-tabs__link">
+          
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../upy/func_ref/" class="md-tabs__link">
+          
+  
+  MicroPython
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../actividades/estructura/" class="md-tabs__link">
+          
+  
+  Actividades
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Miscelanea/about/" class="md-tabs__link">
+          
+  
+  Miscelanea
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Mis notas de pico explorer" class="md-nav__button md-logo" aria-label="Mis notas de pico explorer" data-md-component="logo">
+      
+  <img src="../../img/favicon.png" alt="logo">
+
+    </a>
+    Mis notas de pico explorer
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fgcoca/Mis-notas-de-pico-explorer" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fgcoca/Mis-notas-de-pico-explorer
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducción
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa Pico Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/inicio_pi_pico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio con Raspberry Pi Pico
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/pi_pico_picoW/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La Pi Pico y Pico W
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/inicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Como comenzar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Firmware y software
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Firmware y software
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../up/firm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firmware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../up/soft/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software Thonny
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permisos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permisos en Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sintaxis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sintaxis en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datos en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Estructuras de datos en Python
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de datos en Python
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iterables-e-iteradores" class="md-nav__link">
+    iterables e iteradores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-listas-list" class="md-nav__link">
+    Las listas (list)
+  </a>
+  
+    <nav class="md-nav" aria-label="Las listas (list)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trabajando-con-listas" class="md-nav__link">
+    Trabajando con listas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterar" class="md-nav__link">
+    Iterar
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-tuplas-tuple" class="md-nav__link">
+    Las tuplas (tuple)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diccionarios-dict" class="md-nav__link">
+    Diccionarios (dict)
+  </a>
+  
+    <nav class="md-nav" aria-label="Diccionarios (dict)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterar_1" class="md-nav__link">
+    Iterar
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-o-conjuntos" class="md-nav__link">
+    Set o conjuntos
+  </a>
+  
+    <nav class="md-nav" aria-label="Set o conjuntos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operaciones-con-conjuntos" class="md-nav__link">
+    Operaciones con conjuntos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    Métodos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casting" class="md-nav__link">
+    Casting
+  </a>
+  
+    <nav class="md-nav" aria-label="Casting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conversion-float-a-int" class="md-nav__link">
+    Conversion float a int
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-float-a-string" class="md-nav__link">
+    Conversion float a string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-string-a-float" class="md-nav__link">
+    Conversion string a float
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-string-a-int" class="md-nav__link">
+    Conversion string a int
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-int-a-string" class="md-nav__link">
+    Conversion int a string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-entre-list-y-set" class="md-nav__link">
+    Conversion entre list y set
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../operaradores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operadores en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programacion Orientada a Objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modulos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Módulos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    MicroPython
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MicroPython
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../upy/func_ref/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones de referencia de la placa Pico Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../upy/picographics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La libreria PicoGrphics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../upy/rapida/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de refencia rápida de RP2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../upy/ref_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Referencias a clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Actividades
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Actividades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/estructura/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructura
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A06
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Miscelanea
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Miscelanea
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/lic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licencias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/webgrafia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Webgrafia/Bibliografía
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/soft/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software utilizado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iterables-e-iteradores" class="md-nav__link">
+    iterables e iteradores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-listas-list" class="md-nav__link">
+    Las listas (list)
+  </a>
+  
+    <nav class="md-nav" aria-label="Las listas (list)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trabajando-con-listas" class="md-nav__link">
+    Trabajando con listas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterar" class="md-nav__link">
+    Iterar
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-tuplas-tuple" class="md-nav__link">
+    Las tuplas (tuple)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diccionarios-dict" class="md-nav__link">
+    Diccionarios (dict)
+  </a>
+  
+    <nav class="md-nav" aria-label="Diccionarios (dict)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterar_1" class="md-nav__link">
+    Iterar
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-o-conjuntos" class="md-nav__link">
+    Set o conjuntos
+  </a>
+  
+    <nav class="md-nav" aria-label="Set o conjuntos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operaciones-con-conjuntos" class="md-nav__link">
+    Operaciones con conjuntos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    Métodos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casting" class="md-nav__link">
+    Casting
+  </a>
+  
+    <nav class="md-nav" aria-label="Casting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conversion-float-a-int" class="md-nav__link">
+    Conversion float a int
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-float-a-string" class="md-nav__link">
+    Conversion float a string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-string-a-float" class="md-nav__link">
+    Conversion string a float
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-string-a-int" class="md-nav__link">
+    Conversion string a int
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-int-a-string" class="md-nav__link">
+    Conversion int a string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-entre-list-y-set" class="md-nav__link">
+    Conversion entre list y set
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="estructuras-de-datos-en-python"><FONT COLOR=#8B008B>Estructuras de datos en Python</font><a class="headerlink" href="#estructuras-de-datos-en-python" title="Permanent link">&para;</a></h1>
+<p>En estructuras de datos y de control en Python es habitual utilizar los conceptos de <code>iterable</code> e <code>iterador</code> por lo que antes de nada vamos a describir estos dos conceptos un tanto abstractos y complicados de entender. Utilizaremos para su descripción la sentencia de control <code>for</code>.</p>
+<h2 id="iterables-e-iteradores"><FONT COLOR=#007575><strong>iterables e iteradores</strong></font><a class="headerlink" href="#iterables-e-iteradores" title="Permanent link">&para;</a></h2>
+<p>Iterar significa que se repite o se ha repetido muchas veces. En programación una iteración es un conjunto de instrucciones que se repiten una o varias veces hasta que una condición se cumple o deja de cumplirse.</p>
+<p>Los <code>iterables</code> son objetos que pueden ser indexados y los <code>iteradores</code> son objetos que hacen referencia a un elemento. Los iteradores tienen un método <code>next</code> que permite hacer referencia al siguiente objeto.</p>
+<p>La mayoría de objetos contenedores se pueden recorrer en bucle utilizando una sentencia for:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><a href="#__codelineno-0-2"><span class="linenos" data-linenos=" 2 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><a href="#__codelineno-0-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><a href="#__codelineno-0-4"><span class="linenos" data-linenos=" 4 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><a href="#__codelineno-0-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;one&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><a href="#__codelineno-0-6"><span class="linenos" data-linenos=" 6 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><a href="#__codelineno-0-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s2">&quot;123&quot;</span><span class="p">:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><a href="#__codelineno-0-8"><span class="linenos" data-linenos=" 8 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><a href="#__codelineno-0-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;mifichero.txt&quot;</span><span class="p">):</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><a href="#__codelineno-0-10"><span class="linenos" data-linenos="10 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Este estilo de acceso es claro, conciso y cómodo. La sentencia <code>for</code> llama a <code>iter()</code> sobre el objeto contenedor. La función devuelve un objeto iterador que define el método <code>__next__()</code> que accede a los elementos del contenedor de uno en uno. Cuando no hay más elementos, <code>__next__()</code> lanza una excepción <code>StopIteration</code> que indica al bucle <code>for</code> que termine. El método <code>__next__()</code> se invoca utilizando la función incorporada <code>next()</code>; A continuación vemos una imagen de un ejemplo de iteraciones desde la consola que muestra cómo funciona esto:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/upy/ejem_next_iter.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejemplo de uso de next() en iteraciones" src="../../img/upy/ejem_next_iter.png" /></a><br />
+<em>Ejemplo de uso de next() en iteraciones</em></p>
+<p></center></p>
+<p>Podemos añadir un comportamiento iterador a nuestras clases. Definimos un método <code></code> que devuelva un objeto con un método <code>__next__()</code>. Si la clase define <code>__next__()</code>, entonces <code>__iter__()</code> puede devolver simplemente <code>self</code>. Hacemos un ejemplo de recorrer una cadena en orden inverso al escrito. Definimos la clase <code>Orden_inverso</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="k">class</span> <span class="nc">Orden_inverso</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Iterador para recorrer una secuencia hacia atrás&quot;&quot;&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><a href="#__codelineno-1-3"><span class="linenos" data-linenos=" 3 "></span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><a href="#__codelineno-1-4"><span class="linenos" data-linenos=" 4 "></span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><a href="#__codelineno-1-5"><span class="linenos" data-linenos=" 5 "></span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><a href="#__codelineno-1-6"><span class="linenos" data-linenos=" 6 "></span></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><a href="#__codelineno-1-7"><span class="linenos" data-linenos=" 7 "></span></a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><a href="#__codelineno-1-8"><span class="linenos" data-linenos=" 8 "></span></a>        <span class="k">return</span> <span class="bp">self</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><a href="#__codelineno-1-9"><span class="linenos" data-linenos=" 9 "></span></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><a href="#__codelineno-1-10"><span class="linenos" data-linenos="10 "></span></a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><a href="#__codelineno-1-11"><span class="linenos" data-linenos="11 "></span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><a href="#__codelineno-1-12"><span class="linenos" data-linenos="12 "></span></a>            <span class="k">raise</span> <span class="ne">StopIteration</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><a href="#__codelineno-1-13"><span class="linenos" data-linenos="13 "></span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><a href="#__codelineno-1-14"><span class="linenos" data-linenos="14 "></span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+</code></pre></div>
+<p>Con la clase definida ponemos el interprete en marcha y trabajamos en la consola haciendo lo que vemos en la imagen siguiente:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/upy/clase_orden_inverso.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejemplo de definición de clase y iterar usándola" src="../../img/upy/clase_orden_inverso.png" /></a><br />
+<em>Ejemplo de definición de clase y iterar usándola</em></p>
+<p></center></p>
+<p>En Python la función <code>iter()</code> solamente puede ser llamada sobre un objeto que sea iterable, lo que nos devolverá un iterador. En el ejemplo anterior el iterable es 'cadena' y cuando invocamos <code>iter()</code> nos retorna el iterador <code>&lt;Orden_inverso object at 200159c0&gt;</code>. Veamos otro ejemplo con una lista sencilla:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">iteradora</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">iteradora</span><span class="p">)</span> <span class="c1"># muestra el iterador</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el tipo de iterador y su clase</span>
+</code></pre></div>
+<p>Nos devuelve el resultado siguiente en consola:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">MPY</span><span class="p">:</span> <span class="n">soft</span> <span class="n">reboot</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos="2 "></span></a><span class="o">&lt;</span><span class="n">iterator</span><span class="o">&gt;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><a href="#__codelineno-3-3"><span class="linenos" data-linenos="3 "></span></a><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">iterator</span><span class="s1">&#39;&gt;</span>
+</code></pre></div>
+<p>Lavariable <code>iteradora</code> itera sobre la lista lo que permite acceder a sus elementos con <code>next()</code>. Siguiendo con el ejemplo, si hacemos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="n">iteradora</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">iteradora</span><span class="p">)</span> <span class="c1"># muestra el iterador</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><a href="#__codelineno-4-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el primer elemento</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><a href="#__codelineno-4-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el segundo elemento</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><a href="#__codelineno-4-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el tercer elemento</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><a href="#__codelineno-4-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el cuarto elemento</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><a href="#__codelineno-4-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el quinto elemento</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><a href="#__codelineno-4-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el sexto elemento</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><a href="#__codelineno-4-10"><span class="linenos" data-linenos="10 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el septimo elemento</span>
+</code></pre></div>
+<p>Da como resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="n">iteradora</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">iteradora</span><span class="p">)</span> <span class="c1"># muestra el iterador</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el primer elemento</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el segundo elemento</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><a href="#__codelineno-5-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el tercer elemento</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><a href="#__codelineno-5-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el cuarto elemento</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><a href="#__codelineno-5-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el quinto elemento</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><a href="#__codelineno-5-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el sexto elemento</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><a href="#__codelineno-5-10"><span class="linenos" data-linenos="10 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iteradora</span><span class="p">))</span> <span class="c1"># muestra el septimo elemento</span>
+</code></pre></div>
+<p>Exsiten iteradores para otras  clases, y estos son:</p>
+<ul>
+<li><code>str_iterator</code> para cadenas</li>
+<li><code>list_iterator</code> para listas</li>
+<li><code>tuple_iterator</code> para tuplas</li>
+<li><code>dict_keyiterator</code> para diccionarios</li>
+</ul>
+<p>Se pueden tener varios iteradores para la misma lista y tendrán un funcionamiento totalmente independiente unos de otros.</p>
+<h2 id="las-listas-list"><FONT COLOR=#007575><strong>Las listas (list)</strong></font><a class="headerlink" href="#las-listas-list" title="Permanent link">&para;</a></h2>
+<p>Se trata de un tipo de dato que permite almacenar series de datos de cualquier tipo bajo su estructura. Se suelen asociar a las matrices o arrays de otros lenguajes de programación.</p>
+<p>En Python las listas son muy versatiles permitiendo almacenar un conjunto arbitrario de datos. Es decir, podemos guardar en ellas lo que sea.</p>
+<p>Una lista se crea con <code>[]</code> y sus elementos se separan por comas. Una gran ventaja es que pueden tener datos de diferentes tipos.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Hola&quot;</span><span class="p">,</span> <span class="mf">3.141592</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">Image</span><span class="o">.</span><span class="n">HAPPY</span><span class="p">]</span>
+</code></pre></div>
+<p>Algunas de las principales propiedades de las listas:</p>
+<ul>
+<li>Son ordenadas, mantienen el orden en el que han sido definidas</li>
+<li>Pueden ser formadas por tipos arbitrarios de datos</li>
+<li>Pueden ser indexadas con [i]</li>
+<li>Se pueden anidar, es decir, meter una lista dentro de otra</li>
+<li>Son mutables, ya que sus elementos pueden ser modificados</li>
+<li>Son dinámicas, ya que se pueden añadir o eliminar elementos</li>
+</ul>
+<p>Hay dos métodos aplicables:</p>
+<ul>
+<li><strong><code>append</code></strong>. Permite agregar elementos a la lista.</li>
+<li><strong><code>remove</code></strong>. Elimina elementos de la lista.</li>
+<li><strong><code>insert(pos,elem)</code></strong>. Inserta el elemento <code>elem</code> en la posición <code>pos</code> indicada.</li>
+</ul>
+<p>En el ejemplo vemos el funcionamiento.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/upy/ejem_listas.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejemplo de listas y sus métodos" src="../../img/upy/ejem_listas.png" /></a><br />
+<em>Ejemplo de listas y sus métodos</em></p>
+<p></center></p>
+<h3 id="trabajando-con-listas"><FONT COLOR=#AA0000><strong>Trabajando con listas</strong></font><a class="headerlink" href="#trabajando-con-listas" title="Permanent link">&para;</a></h3>
+<p>Una vez que tenemos una lista creada sus elementos son accesibles para trabajar con ellos, modificarlos o incluso eliminar o añadir elementos a la lista. Vamos a trabajar con un ejemplo sencillo para que se entienda mejor. </p>
+<ul>
+<li><strong>Acceso por índice</strong>. Un programa como el siguiente:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;texto&quot;</span><span class="p">,</span><span class="mf">2.87</span><span class="p">]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># indice 0 -&gt; valor =  1 entero</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># indice 2 -&gt; valor = texto</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><a href="#__codelineno-7-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># indice 3 -&gt; valor = 2.87 real</span>
+</code></pre></div>
+<p>Nos devuelve en la consola:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos="1 "></span></a><span class="mi">1</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><a href="#__codelineno-8-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">texto</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos="3 "></span></a><span class="mf">2.87</span>
+</code></pre></div>
+<p>Casos especiales de valores de índice son:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;texto&quot;</span><span class="p">,</span><span class="mf">2.87</span><span class="p">]</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><a href="#__codelineno-9-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># ultimo elemento</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><a href="#__codelineno-9-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># penultimo elemento</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><a href="#__codelineno-9-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># antepenultimo elemento</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><a href="#__codelineno-9-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># Error fuera de rango</span>
+</code></pre></div>
+<p>Que da el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos="1 "></span></a><span class="mf">2.87</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">texto</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><a href="#__codelineno-10-3"><span class="linenos" data-linenos="3 "></span></a><span class="mi">2</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><a href="#__codelineno-10-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><a href="#__codelineno-10-5"><span class="linenos" data-linenos="5 "></span></a>  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">5</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><a href="#__codelineno-10-6"><span class="linenos" data-linenos="6 "></span></a><span class="ne">IndexError</span><span class="p">:</span> <span class="nb">list</span> <span class="n">index</span> <span class="n">out</span> <span class="n">of</span> <span class="nb">range</span>
+</code></pre></div>
+<ul>
+<li><strong>Modificar elementos</strong>. Continuamos con el mismo ejemplo.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;texto&quot;</span><span class="p">,</span><span class="mf">2.87</span><span class="p">]</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><a href="#__codelineno-11-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><a href="#__codelineno-11-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">lista</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;nuevo texto&quot;</span> <span class="c1"># cambio en elemento 2</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><a href="#__codelineno-11-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><a href="#__codelineno-11-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">del</span> <span class="n">lista</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># se elimina el elemento 1</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><a href="#__codelineno-11-6"><span class="linenos" data-linenos="6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;texto&#39;</span><span class="p">,</span> <span class="mf">2.87</span><span class="p">]</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><a href="#__codelineno-12-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;nuevo texto&#39;</span><span class="p">,</span> <span class="mf">2.87</span><span class="p">]</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><a href="#__codelineno-12-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;nuevo texto&#39;</span><span class="p">,</span> <span class="mf">2.87</span><span class="p">]</span>
+</code></pre></div>
+<ul>
+<li><strong>Listas anidadas</strong>. Es posible crear dentro de otras listas e incluso dentro de otra lista. El acceso a los elementos consiste en utilizar tantos [] como anidados tengamos. Ejemplo de lista con tres niveles de anidado.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;texto&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mi">22</span><span class="p">,</span><span class="s2">&quot;pico&quot;</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">],[</span><span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">]]</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><a href="#__codelineno-13-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><a href="#__codelineno-13-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1">#texto</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><a href="#__codelineno-13-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># 2lista</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><a href="#__codelineno-13-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># p</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><a href="#__codelineno-13-6"><span class="linenos" data-linenos="6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># 50</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;texto&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="s1">&#39;pico&#39;</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">]]</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><a href="#__codelineno-14-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">texto</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><a href="#__codelineno-14-3"><span class="linenos" data-linenos="3 "></span></a><span class="mi">22</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><a href="#__codelineno-14-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">p</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><a href="#__codelineno-14-5"><span class="linenos" data-linenos="5 "></span></a><span class="mi">50</span>
+</code></pre></div>
+<ul>
+<li><strong>Sublistas</strong>. Son listas obtenidas a partir de otra de mayor tamaño. Se utiliza el operador dos puntos (:) entre corchetes dejando a la izquierda el valor de inicio y a la derecha el valor siguiente al final, dado que el último valor indicado no se incluye. Utilizando el concepto de sublista se pueden modificar varios valores de una sola vez. A continuación vemos esto con un ejemplo.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;texto&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><a href="#__codelineno-15-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><a href="#__codelineno-15-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># sublista [2,3]</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><a href="#__codelineno-15-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span> <span class="c1"># sublista [2,3,4,&#39;p&#39;]</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><a href="#__codelineno-15-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">lista</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="s1">&#39;pp&#39;</span><span class="p">]</span> <span class="c1"># modificacion de multiples valores</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><a href="#__codelineno-15-6"><span class="linenos" data-linenos="6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+</code></pre></div>
+<p>Devuelve el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><a href="#__codelineno-16-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;texto&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">]</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><a href="#__codelineno-16-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><a href="#__codelineno-16-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">]</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><a href="#__codelineno-16-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;texto&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="s1">&#39;pp&#39;</span><span class="p">]</span>
+</code></pre></div>
+<ul>
+<li><strong>otras funcionalidades</strong>. Se puede utilizar el operador suma (+) para añadir elementos a una lista y el operador de asignación (=) para asignar los valores de una lista a variables discretas. Veamos un ejemplo:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><a href="#__codelineno-17-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;texto&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><a href="#__codelineno-17-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">lista</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s2">&quot;otro texto&quot;</span><span class="p">]</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><a href="#__codelineno-17-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><a href="#__codelineno-17-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">i</span> <span class="o">=</span> <span class="n">lista</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a><a href="#__codelineno-17-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div>
+<p>Que devuelve lo siguiente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><a href="#__codelineno-18-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;texto&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;otro texto&#39;</span><span class="p">]</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><a href="#__codelineno-18-2"><span class="linenos" data-linenos="2 "></span></a><span class="mi">1</span> <span class="n">texto</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="n">p</span> <span class="mi">20</span> <span class="mi">30</span> <span class="n">otro</span> <span class="n">texto</span>
+</code></pre></div>
+<h3 id="iterar"><FONT COLOR=#AA0000><strong>Iterar</strong></font><a class="headerlink" href="#iterar" title="Permanent link">&para;</a></h3>
+<p>Las listas se pueden iterar de diferentes formas, tal y como vemos a continuación.</p>
+<ul>
+<li><strong>Con índices</strong>. Se trata de recorrer la  lista utilizando los índices. Para ello se suele utilizar lafunción <code>len()</code>, que devuelve la longitud de la lista, y así por ejemplo:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><a href="#__codelineno-19-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;texto&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><a href="#__codelineno-19-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="c1"># iteramos toda la lista</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><a href="#__codelineno-19-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lista</span><span class="p">)):</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><a href="#__codelineno-19-4"><span class="linenos" data-linenos=" 4 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><a href="#__codelineno-19-5"><span class="linenos" data-linenos=" 5 "></span></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><a href="#__codelineno-19-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><a href="#__codelineno-19-7"><span class="linenos" data-linenos=" 7 "></span></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><a href="#__codelineno-19-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="c1">#iteramos parte de la lista</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a><a href="#__codelineno-19-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lista</span><span class="p">)):</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10"></a><a href="#__codelineno-19-10"><span class="linenos" data-linenos="10 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</code></pre></div>
+<p>Nos mostrará en consola el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><a href="#__codelineno-20-1"><span class="linenos" data-linenos="1 "></span></a><span class="mi">1</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><a href="#__codelineno-20-2"><span class="linenos" data-linenos="2 "></span></a><span class="mi">2</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><a href="#__codelineno-20-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">texto</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a><a href="#__codelineno-20-4"><span class="linenos" data-linenos="4 "></span></a><span class="mi">3</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5"></a><a href="#__codelineno-20-5"><span class="linenos" data-linenos="5 "></span></a><span class="o">------</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a><a href="#__codelineno-20-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">texto</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7"></a><a href="#__codelineno-20-7"><span class="linenos" data-linenos="7 "></span></a><span class="mi">3</span>
+</code></pre></div>
+<ul>
+<li><strong>recorriendola</strong>. Se trata de recorrer la lista mostrando el valor de cada elemento de la misma. Por ejemplo:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><a href="#__codelineno-21-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;texto&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><a href="#__codelineno-21-2"><span class="linenos" data-linenos="2 "></span></a><span class="c1"># iteramos toda la lista</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><a href="#__codelineno-21-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">for</span> <span class="n">indice</span> <span class="ow">in</span> <span class="n">lista</span><span class="p">:</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a><a href="#__codelineno-21-4"><span class="linenos" data-linenos="4 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">indice</span><span class="p">)</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5"></a><a href="#__codelineno-21-5"><span class="linenos" data-linenos="5 "></span></a><span class="c1"># iteramos un elemento por su índice</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a><a href="#__codelineno-21-6"><span class="linenos" data-linenos="6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div>
+<p>Nos devuelve el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><a href="#__codelineno-22-1"><span class="linenos" data-linenos="1 "></span></a><span class="mi">1</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><a href="#__codelineno-22-2"><span class="linenos" data-linenos="2 "></span></a><span class="mi">2</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><a href="#__codelineno-22-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">texto</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><a href="#__codelineno-22-4"><span class="linenos" data-linenos="4 "></span></a><span class="mi">3</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><a href="#__codelineno-22-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">texto</span>
+</code></pre></div>
+<ul>
+<li><strong>enumerando elementos</strong>. Se trata de mostrar tanto el índice como el valor. Como ejemplo hacemos:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><a href="#__codelineno-23-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;texto&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><a href="#__codelineno-23-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">for</span> <span class="n">indice</span><span class="p">,</span><span class="n">valor</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><a href="#__codelineno-23-3"><span class="linenos" data-linenos="3 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Elemento&quot;</span><span class="p">,</span> <span class="n">indice</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">valor</span><span class="p">)</span>
+</code></pre></div>
+<p>Que nos devuelve como resultado lo siguiente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><a href="#__codelineno-24-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">Elemento</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><a href="#__codelineno-24-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">Elemento</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><a href="#__codelineno-24-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">Elemento</span> <span class="mi">2</span> <span class="o">=</span> <span class="n">texto</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a><a href="#__codelineno-24-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">Elemento</span> <span class="mi">3</span> <span class="o">=</span> <span class="mi">3</span>
+</code></pre></div>
+<ul>
+<li><strong>iterando varias listas a la vez</strong>. Un ejemplo que utiliza esta técnica es:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><a href="#__codelineno-25-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;tres&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><a href="#__codelineno-25-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">lista2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;uno&quot;</span><span class="p">,</span><span class="s2">&quot;dos&quot;</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;cuatro&quot;</span><span class="p">]</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><a href="#__codelineno-25-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">for</span> <span class="n">v1</span><span class="p">,</span><span class="n">v2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lista1</span><span class="p">,</span><span class="n">lista2</span><span class="p">):</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a><a href="#__codelineno-25-4"><span class="linenos" data-linenos="4 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="n">v2</span><span class="p">)</span>
+</code></pre></div>
+<p>Que devuelve el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><a href="#__codelineno-26-1"><span class="linenos" data-linenos="1 "></span></a><span class="mi">1</span> <span class="n">uno</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><a href="#__codelineno-26-2"><span class="linenos" data-linenos="2 "></span></a><span class="mi">2</span> <span class="n">dos</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><a href="#__codelineno-26-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">tres</span> <span class="mi">3</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a><a href="#__codelineno-26-4"><span class="linenos" data-linenos="4 "></span></a><span class="mi">4</span> <span class="n">cuatro</span>
+</code></pre></div>
+<h2 id="las-tuplas-tuple"><FONT COLOR=#007575><strong>Las tuplas (tuple)</strong></font><a class="headerlink" href="#las-tuplas-tuple" title="Permanent link">&para;</a></h2>
+<p>Son muy similares a las listas con una diferencia principal con las mismas y es que las tuplas no pueden ser modificadas directamente, lo que implica que no dispone de los métodos vistos para listas. Una tupla permite tener agrupados un número <strong>inmutable</strong> de elementos. Cuando decimos inmutable significa que no pueden ser modificadas una vez declaradas.</p>
+<p>Una tupla se inicializa con <code>()</code> en lugar de los corchetes y sus elementos se separan por comas. Los paréntesis se pueden omitir y dejar los elementos simplemente separados por comas.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><a href="#__codelineno-27-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">tupla</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><a href="#__codelineno-27-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">tupla</span><span class="p">)</span>
+</code></pre></div>
+<p>Principales propiedades:</p>
+<ul>
+<li>Se pueden declarar sin usar los paréntesis, pero no se recomienda. No usarlos puede llevarnos a ambigüedades del tipo print(1, 2, 3) y print((1, 2, 3)).</li>
+<li>Si la tupla tiene un solo elemento esta debe finalizar con coma.</li>
+<li>Se pueden anidar tuplas, por ejemplo <code>tupla2 = tupla1, 4, 5, 6, 7</code>.</li>
+<li>Se pueden declarar tuplas vacias, por ejemplo <code>tupla3 = ()</code>.</li>
+<li>Las tuplas son <em>iterables</em> por lo que sus elementos pueden ser accesados mediante la notación de índice del elemento entre corchetes. Si se quiere acceder a un rango de indices se separan por ":" ambos índices.</li>
+<li>Es posible convertir listas en tuplas simplemente poniendo la lista dentro de los paréntesis de la tupla, por ejemplo:</li>
+</ul>
+<p><code>tupla_lista = ([1, "Hola", 3.141592, [1 , 2, 3]])</code></p>
+<p>A continuación vemos la imagen de un ejemplo donde se explica todo lo anterior.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/upy/ejem_tuplas.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejemplo de tuplas" src="../../img/upy/ejem_tuplas.png" /></a><br />
+<em>Ejemplo de tuplas</em></p>
+<p></center></p>
+<p>Existen dos métodos aplicables a las tuplas:</p>
+<ul>
+<li><strong><code>count()</code></strong>. Se utiliza para contar el número de veces que el objeto que le pasamos como parámetro se encuentra en la tupla.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><a href="#__codelineno-28-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">tupla</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;tres&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;tres&#39;</span><span class="p">)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><a href="#__codelineno-28-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">tupla</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><a href="#__codelineno-28-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">tupla</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><a href="#__codelineno-28-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">tupla</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;tres&#39;</span><span class="p">))</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><a href="#__codelineno-29-1"><span class="linenos" data-linenos="1 "></span></a><span class="mi">4</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a><a href="#__codelineno-29-2"><span class="linenos" data-linenos="2 "></span></a><span class="mi">2</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3"></a><a href="#__codelineno-29-3"><span class="linenos" data-linenos="3 "></span></a><span class="mi">2</span>
+</code></pre></div>
+<ul>
+<li><strong><code>index()</code></strong>. Localiza y devuelve el índice del objeto pasado como parámetro. Si no encuentra nada devuelve un error. Este método acepta un segundo parámetro que permite indicar a partir de que elemento se comienza a buscar el objeto.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><a href="#__codelineno-30-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">tupla</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;tres&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;tres&#39;</span><span class="p">)</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a><a href="#__codelineno-30-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">tupla</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># el indice del 4 es 3</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><a href="#__codelineno-30-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">tupla</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># primera aparicion del 2 en indice 1</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a><a href="#__codelineno-30-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">tupla</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># aparicion del 2 tras la posicion 2</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a><a href="#__codelineno-30-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">tupla</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="c1"># elemento no existente genera Error</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><a href="#__codelineno-31-1"><span class="linenos" data-linenos="1 "></span></a><span class="mi">3</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a><a href="#__codelineno-31-2"><span class="linenos" data-linenos="2 "></span></a><span class="mi">1</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a><a href="#__codelineno-31-3"><span class="linenos" data-linenos="3 "></span></a><span class="mi">7</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a><a href="#__codelineno-31-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5"></a><a href="#__codelineno-31-5"><span class="linenos" data-linenos="5 "></span></a>  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">5</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6"></a><a href="#__codelineno-31-6"><span class="linenos" data-linenos="6 "></span></a><span class="ne">ValueError</span><span class="p">:</span> <span class="nb">object</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sequence</span>
+</code></pre></div>
+<h2 id="diccionarios-dict"><FONT COLOR=#007575><strong>Diccionarios (dict)</strong></font><a class="headerlink" href="#diccionarios-dict" title="Permanent link">&para;</a></h2>
+<p>Estas estructuras contienen la colección de elementos con la forma <code>clave:valor</code> separados por comas y encerrados entre <code>{}</code>. Las claves son objetos inmutables y los valores pueden ser de cualquier tipo. Sus principales características son:</p>
+<ul>
+<li>En lugar de por índice como en listas y tuplas, en diccionarios se acceder al valor por su clave.</li>
+<li>Permiten eliminar cualquier entrada.</li>
+<li>Al igual que las listas, el diccionario permite modificar los valores.</li>
+<li>El método <code>dicc.get()</code> accede a un valor por la clave del mismo.</li>
+<li>El método <code>dicc.items()</code> devuelve una lista de tuplas <code>clave:valor</code>.</li>
+<li>El método <code>dicc.keys()</code> devuelve una lista de las claves.</li>
+<li>El método <code>dicc.values()</code> devuelve una lista de los valores.</li>
+<li>El método <code>dicc.update()</code> añade elemento <code>clave:valor</code> al diccionario.</li>
+<li>El método <code>del dicc</code> borra el par <code>clave:valor</code>.</li>
+<li>El método <code>dicc.pop()</code> borra el par <code>clave:valor</code>.</li>
+</ul>
+<p>A continuación vemos un ejemplo.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/upy/ejem_dicc.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejemplo de diccionario" src="../../img/upy/ejem_dicc.png" /></a><br />
+<em>Ejemplo de diccionario</em></p>
+<p></center></p>
+<p>En diccionarios tenemos disponibles los siguiente métodos:</p>
+<ul>
+<li><strong><code>clear()</code></strong>. Vacía el diccionario eliminando todos sus elementos.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><a href="#__codelineno-32-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2"></a><a href="#__codelineno-32-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">dicc</span><span class="p">)</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a><a href="#__codelineno-32-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">dicc</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4"></a><a href="#__codelineno-32-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">dicc</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><a href="#__codelineno-33-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">{</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;Laura&#39;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span> <span class="s1">&#39;Ana&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><a href="#__codelineno-33-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{}</span>
+</code></pre></div>
+<ul>
+<li><strong><code>copy()</code></strong>. Copia un diccionario.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><a href="#__codelineno-34-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2"></a><a href="#__codelineno-34-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">dicc_copia</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a><a href="#__codelineno-34-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">dicc_copia</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1"></a><a href="#__codelineno-35-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">{</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;Laura&#39;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span> <span class="s1">&#39;Ana&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong><code>fromkeys()</code></strong>. Retorna un diccionario con las claves y el valor indicados. Es decir, el método <code>fromkeys()</code> se utiliza en diccionarios para crear un nuevo diccionario a partir de una relación de claves. De manera opcional se puede especificar un valor.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><a href="#__codelineno-36-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2"></a><a href="#__codelineno-36-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">nuevo_dicc</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">dicc</span><span class="p">)</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3"></a><a href="#__codelineno-36-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">nuevo_dicc</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><a href="#__codelineno-37-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Isa&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Laura&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong><code>get()</code></strong>. Retorna el valor de la clave indicada. La ventaja de usar <code>get()</code> en lugar del acceso genérico por clave es que con <code>get()</code> no se genera una excepción KeyError si la clave no existe ya que devuelve un valor predeterminado. Si no indicamos un valor predeterminado devulve <code>None</code>.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a><a href="#__codelineno-38-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2"></a><a href="#__codelineno-38-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">clave1</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Ana&#39;</span><span class="p">)</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3"></a><a href="#__codelineno-38-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">clave2</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Isabel&#39;</span><span class="p">)</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4"></a><a href="#__codelineno-38-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">clave3</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Isa&#39;</span><span class="p">,</span> <span class="s2">&quot;No existe&quot;</span><span class="p">)</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5"></a><a href="#__codelineno-38-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">clave4</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Isabel&#39;</span><span class="p">,</span> <span class="s2">&quot;No existe&quot;</span><span class="p">)</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6"></a><a href="#__codelineno-38-6"><span class="linenos" data-linenos="6 "></span></a>
+<a id="__codelineno-38-7" name="__codelineno-38-7"></a><a href="#__codelineno-38-7"><span class="linenos" data-linenos="7 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">clave1</span><span class="p">,</span><span class="n">clave2</span><span class="p">,</span><span class="n">clave3</span><span class="p">,</span><span class="n">clave4</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1"></a><a href="#__codelineno-39-1"><span class="linenos" data-linenos="1 "></span></a><span class="mi">40</span> <span class="kc">None</span> <span class="mi">30</span> <span class="n">No</span> <span class="n">existe</span>
+</code></pre></div>
+<ul>
+<li><strong><code>items()</code></strong>. Retorna una lista con una tupla por cada par de elementos.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1"></a><a href="#__codelineno-40-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2"></a><a href="#__codelineno-40-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">clave</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3"></a><a href="#__codelineno-40-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">dicc</span><span class="p">[</span><span class="s1">&#39;Ana&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">38</span> <span class="c1"># modificamos la clave &#39;Ana&#39;</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4"></a><a href="#__codelineno-40-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">clave</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1"></a><a href="#__codelineno-41-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dict_items</span><span class="p">([(</span><span class="s1">&#39;Isa&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="mi">42</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Laura&#39;</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Ana&#39;</span><span class="p">,</span> <span class="mi">38</span><span class="p">)])</span>
+</code></pre></div>
+<ul>
+<li><strong><code>keys()</code></strong>. Retorna una lista con las claves del diccionario.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1"></a><a href="#__codelineno-42-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2"></a><a href="#__codelineno-42-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">clave</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3"></a><a href="#__codelineno-42-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">clave</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a><a href="#__codelineno-43-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dict_keys</span><span class="p">([</span><span class="s1">&#39;Isa&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;Laura&#39;</span><span class="p">,</span> <span class="s1">&#39;Ana&#39;</span><span class="p">])</span>
+</code></pre></div>
+<ul>
+<li><strong><code>pop()</code></strong>. Elimina el elemento con la clave indicada y devuelve el valor asociado a esa clave.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1"></a><a href="#__codelineno-44-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2"></a><a href="#__codelineno-44-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">clave_elminada</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;Ana&#39;</span><span class="p">,</span><span class="s2">&quot;No existe&quot;</span><span class="p">)</span> <span class="c1"># elimina clave &#39;Ana&#39;</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3"></a><a href="#__codelineno-44-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">dicc</span><span class="p">)</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4"></a><a href="#__codelineno-44-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">clave_elminada</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><a href="#__codelineno-45-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">{</span><span class="s1">&#39;Isa&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;Laura&#39;</span><span class="p">:</span> <span class="mi">36</span><span class="p">}</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2"></a><a href="#__codelineno-45-2"><span class="linenos" data-linenos="2 "></span></a><span class="mi">40</span>
+</code></pre></div>
+<ul>
+<li><strong><code>popitem()</code></strong>. Elimina el último par de clave-valor introducido. Se utiliza para eliminar y devolver un par clave/valor aleatorio.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a><a href="#__codelineno-46-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isabel&#39;</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;Puri&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">}</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2"></a><a href="#__codelineno-46-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">par_elminado</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span> <span class="c1"># elimina y obtiene par clave/valor aleatorio</span>
+<a id="__codelineno-46-3" name="__codelineno-46-3"></a><a href="#__codelineno-46-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El par clave/valor eliminado es:&quot;</span><span class="p">,</span><span class="n">par_elminado</span><span class="p">)</span>
+<a id="__codelineno-46-4" name="__codelineno-46-4"></a><a href="#__codelineno-46-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El diccionario queda asi:&quot;</span><span class="p">,</span><span class="n">dicc</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a><a href="#__codelineno-47-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">El</span> <span class="n">par</span> <span class="n">clave</span><span class="o">/</span><span class="n">valor</span> <span class="n">eliminado</span> <span class="n">es</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Isabel&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2"></a><a href="#__codelineno-47-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">El</span> <span class="n">diccionario</span> <span class="n">queda</span> <span class="n">asi</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span> <span class="s1">&#39;Puri&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;Ana&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong><code>setdefault()</code></strong>. Retorna el valor de la clave indicada. Si la clave no existe la inserta con el valor indicado. Si la clave existe, el método retorna el valor de esa clave sin realizar cambios en el diccionario.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1"></a><a href="#__codelineno-48-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isabel&#39;</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;Puri&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">}</span>
+<a id="__codelineno-48-2" name="__codelineno-48-2"></a><a href="#__codelineno-48-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">puri_edad</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;Puri&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-48-3" name="__codelineno-48-3"></a><a href="#__codelineno-48-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">emilia_edad</span> <span class="o">=</span> <span class="n">dicc</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;Emilia&#39;</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<a id="__codelineno-48-4" name="__codelineno-48-4"></a><a href="#__codelineno-48-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Edad de Puri:&quot;</span><span class="p">,</span><span class="n">puri_edad</span><span class="p">)</span>
+<a id="__codelineno-48-5" name="__codelineno-48-5"></a><a href="#__codelineno-48-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">dicc</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1"></a><a href="#__codelineno-49-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">Edad</span> <span class="n">de</span> <span class="n">Puri</span><span class="p">:</span> <span class="mi">50</span>
+<a id="__codelineno-49-2" name="__codelineno-49-2"></a><a href="#__codelineno-49-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;Puri&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;Laura&#39;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span> <span class="s1">&#39;Ana&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;Emilia&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;Isabel&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong><code>update()</code></strong>. Actualiza el diccionario con los pares clave-valor indicados. Se utiliza para actualizar o modificar un diccionario con una secuencia de pares clave/valor o bien con otro diccionario. Los pares clave/valor se agregan o actualizan  si ya existen.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1"></a><a href="#__codelineno-50-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isabel&#39;</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;Puri&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">}</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2"></a><a href="#__codelineno-50-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">dicc</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;Puri&#39;</span><span class="p">:</span><span class="mi">55</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">45</span><span class="p">})</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3"></a><a href="#__codelineno-50-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">dicc</span><span class="p">)</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1"></a><a href="#__codelineno-51-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">{</span><span class="s1">&#39;Isabel&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;Laura&#39;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span> <span class="s1">&#39;Puri&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span> <span class="s1">&#39;Ana&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="iterar_1"><FONT COLOR=#AA0000>Iterar</font><a class="headerlink" href="#iterar_1" title="Permanent link">&para;</a></h3>
+<p>Los diccionarios se pueden iterar de forma similar a las listas. En el ejemplo vemos como hacerlo.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1"></a><a href="#__codelineno-52-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">dicc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Ana&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s1">&#39;Juan&#39;</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="s1">&#39;Laura&#39;</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="s1">&#39;Isabel&#39;</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;Puri&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">}</span>
+<a id="__codelineno-52-2" name="__codelineno-52-2"></a><a href="#__codelineno-52-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dicc</span><span class="p">:</span>
+<a id="__codelineno-52-3" name="__codelineno-52-3"></a><a href="#__codelineno-52-3"><span class="linenos" data-linenos="3 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c1"># imprime las claves</span>
+<a id="__codelineno-52-4" name="__codelineno-52-4"></a><a href="#__codelineno-52-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------&quot;</span><span class="p">)</span>
+<a id="__codelineno-52-5" name="__codelineno-52-5"></a><a href="#__codelineno-52-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">dicc</span><span class="p">:</span>
+<a id="__codelineno-52-6" name="__codelineno-52-6"></a><a href="#__codelineno-52-6"><span class="linenos" data-linenos="6 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">dicc</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="c1"># imprime los valores de las claves</span>
+<a id="__codelineno-52-7" name="__codelineno-52-7"></a><a href="#__codelineno-52-7"><span class="linenos" data-linenos="7 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------&quot;</span><span class="p">)</span>
+<a id="__codelineno-52-8" name="__codelineno-52-8"></a><a href="#__codelineno-52-8"><span class="linenos" data-linenos="8 "></span></a><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="n">dicc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-52-9" name="__codelineno-52-9"></a><a href="#__codelineno-52-9"><span class="linenos" data-linenos="9 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">l</span><span class="p">)</span> <span class="c1"># imprime los pares clave/valor</span>
+</code></pre></div>
+<p>Que arroja el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a><a href="#__codelineno-53-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">Isabel</span>
+<a id="__codelineno-53-2" name="__codelineno-53-2"></a><a href="#__codelineno-53-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="n">Laura</span>
+<a id="__codelineno-53-3" name="__codelineno-53-3"></a><a href="#__codelineno-53-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">Puri</span>
+<a id="__codelineno-53-4" name="__codelineno-53-4"></a><a href="#__codelineno-53-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="n">Ana</span>
+<a id="__codelineno-53-5" name="__codelineno-53-5"></a><a href="#__codelineno-53-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="n">Juan</span>
+<a id="__codelineno-53-6" name="__codelineno-53-6"></a><a href="#__codelineno-53-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="o">------------------------</span>
+<a id="__codelineno-53-7" name="__codelineno-53-7"></a><a href="#__codelineno-53-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="mi">60</span>
+<a id="__codelineno-53-8" name="__codelineno-53-8"></a><a href="#__codelineno-53-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="mi">36</span>
+<a id="__codelineno-53-9" name="__codelineno-53-9"></a><a href="#__codelineno-53-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="mi">50</span>
+<a id="__codelineno-53-10" name="__codelineno-53-10"></a><a href="#__codelineno-53-10"><span class="linenos" data-linenos="10 "></span></a><span class="mi">40</span>
+<a id="__codelineno-53-11" name="__codelineno-53-11"></a><a href="#__codelineno-53-11"><span class="linenos" data-linenos="11 "></span></a><span class="mi">42</span>
+<a id="__codelineno-53-12" name="__codelineno-53-12"></a><a href="#__codelineno-53-12"><span class="linenos" data-linenos="12 "></span></a><span class="o">------------------------</span>
+<a id="__codelineno-53-13" name="__codelineno-53-13"></a><a href="#__codelineno-53-13"><span class="linenos" data-linenos="13 "></span></a><span class="n">Isabel</span> <span class="p">:</span> <span class="mi">60</span>
+<a id="__codelineno-53-14" name="__codelineno-53-14"></a><a href="#__codelineno-53-14"><span class="linenos" data-linenos="14 "></span></a><span class="n">Laura</span> <span class="p">:</span> <span class="mi">36</span>
+<a id="__codelineno-53-15" name="__codelineno-53-15"></a><a href="#__codelineno-53-15"><span class="linenos" data-linenos="15 "></span></a><span class="n">Puri</span> <span class="p">:</span> <span class="mi">50</span>
+<a id="__codelineno-53-16" name="__codelineno-53-16"></a><a href="#__codelineno-53-16"><span class="linenos" data-linenos="16 "></span></a><span class="n">Ana</span> <span class="p">:</span> <span class="mi">40</span>
+<a id="__codelineno-53-17" name="__codelineno-53-17"></a><a href="#__codelineno-53-17"><span class="linenos" data-linenos="17 "></span></a><span class="n">Juan</span> <span class="p">:</span> <span class="mi">42</span>
+</code></pre></div>
+<h2 id="set-o-conjuntos"><FONT COLOR=#007575><strong>Set o conjuntos</strong></font><a class="headerlink" href="#set-o-conjuntos" title="Permanent link">&para;</a></h2>
+<p>Se trata de una estructura que se utiliza para almacenar datos de manera similar a las listas pero con las siguientes diferencias:</p>
+<ul>
+<li>En un <code>set</code> los elementos son únicos no pudiendo existir duplicados.</li>
+<li>Los <code>set</code> no mantienen un orden en sus elementos de cuando son declarados a cuando se trabaja con ellos.</li>
+<li>Los elementos de un <code>set</code> son inmutables.</li>
+<li>Los <code>set</code> se iteran de la misma forma que las listas.</li>
+</ul>
+<p>La forma de crear un <code>set</code> en Python es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><a href="#__codelineno-54-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">conjunto</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span> <span class="c1"># forma simplificada</span>
+</code></pre></div>
+<h3 id="operaciones-con-conjuntos"><FONT COLOR=#AA0000>Operaciones con conjuntos</font><a class="headerlink" href="#operaciones-con-conjuntos" title="Permanent link">&para;</a></h3>
+<p>Como conjuntos que son permiten realizar diferentes operaciones que vamos a mostrar a partir del ejemplo siguiente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a><a href="#__codelineno-55-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<a id="__codelineno-55-2" name="__codelineno-55-2"></a><a href="#__codelineno-55-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">}</span>
+<a id="__codelineno-55-3" name="__codelineno-55-3"></a><a href="#__codelineno-55-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="c1"># unión</span>
+<a id="__codelineno-55-4" name="__codelineno-55-4"></a><a href="#__codelineno-55-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="n">union</span> <span class="o">=</span> <span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+<a id="__codelineno-55-5" name="__codelineno-55-5"></a><a href="#__codelineno-55-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">union</span><span class="p">)</span>
+<a id="__codelineno-55-6" name="__codelineno-55-6"></a><a href="#__codelineno-55-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="c1"># interseccion</span>
+<a id="__codelineno-55-7" name="__codelineno-55-7"></a><a href="#__codelineno-55-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="n">inter</span> <span class="o">=</span> <span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+<a id="__codelineno-55-8" name="__codelineno-55-8"></a><a href="#__codelineno-55-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">inter</span><span class="p">)</span>
+<a id="__codelineno-55-9" name="__codelineno-55-9"></a><a href="#__codelineno-55-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="c1"># diferencia</span>
+<a id="__codelineno-55-10" name="__codelineno-55-10"></a><a href="#__codelineno-55-10"><span class="linenos" data-linenos="10 "></span></a><span class="n">dif</span> <span class="o">=</span> <span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+<a id="__codelineno-55-11" name="__codelineno-55-11"></a><a href="#__codelineno-55-11"><span class="linenos" data-linenos="11 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">dif</span><span class="p">)</span>
+<a id="__codelineno-55-12" name="__codelineno-55-12"></a><a href="#__codelineno-55-12"><span class="linenos" data-linenos="12 "></span></a><span class="c1"># agregar elementos</span>
+<a id="__codelineno-55-13" name="__codelineno-55-13"></a><a href="#__codelineno-55-13"><span class="linenos" data-linenos="13 "></span></a><span class="n">set1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<a id="__codelineno-55-14" name="__codelineno-55-14"></a><a href="#__codelineno-55-14"><span class="linenos" data-linenos="14 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+<a id="__codelineno-55-15" name="__codelineno-55-15"></a><a href="#__codelineno-55-15"><span class="linenos" data-linenos="15 "></span></a><span class="c1"># elminar elementos</span>
+<a id="__codelineno-55-16" name="__codelineno-55-16"></a><a href="#__codelineno-55-16"><span class="linenos" data-linenos="16 "></span></a><span class="n">set1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<a id="__codelineno-55-17" name="__codelineno-55-17"></a><a href="#__codelineno-55-17"><span class="linenos" data-linenos="17 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</code></pre></div>
+<p>El resultado de estas operaciones es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a><a href="#__codelineno-56-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">}</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2"></a><a href="#__codelineno-56-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<a id="__codelineno-56-3" name="__codelineno-56-3"></a><a href="#__codelineno-56-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+<a id="__codelineno-56-4" name="__codelineno-56-4"></a><a href="#__codelineno-56-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<a id="__codelineno-56-5" name="__codelineno-56-5"></a><a href="#__codelineno-56-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="metodos"><FONT COLOR=#AA0000>Métodos</font><a class="headerlink" href="#metodos" title="Permanent link">&para;</a></h3>
+<p>Los conjuntos tienen disponibles los siguientes métodos:</p>
+<ul>
+<li><strong>add()</strong>. Agrega un elemento al conjunto.</li>
+<li><strong>clear()</strong>. Elimina todos los elementos de un conjunto.</li>
+<li><strong>copy()</strong>. Retorna una copia del conjunto.</li>
+<li><strong>difference()</strong>. Retorna un conjunto que es la diferencia entre dos o más conjuntos.</li>
+<li><strong>difference_update()</strong>. Elimina los elementos de un conjunto están incluidos en otro conjunto especificado.</li>
+<li><strong>discard()</strong>. Elimina el elemento especificado.</li>
+<li><strong>intersection()</strong>. Retorna el conjunto intersección de dos o más conjuntos.</li>
+<li><strong>intersection_update()</strong>. Elimina los elementos de un conjunto que no están presentes en otros conjuntos especificados.</li>
+<li><strong>isdisjoint()</strong>. Retorna si dos conjuntos tienen una intersección o no.</li>
+<li><strong>issubset()</strong>. Retorna si otro conjunto contiene a este conjunto o no.</li>
+<li><strong>issuperset()</strong>. Retorna si este conjunto contiene otro conjunto o no.</li>
+<li><strong>pop()</strong> Elimina un elemento del conjunto.</li>
+<li><strong>remove()</strong>. Elimina el elemento especificado.</li>
+<li><strong>symmetric_difference()</strong>. Retorna un conjunto con las diferencias simétricas de dos conjuntos.</li>
+<li><strong>symmetric_difference_update()</strong>. Inserta las diferencias simétricas de este conjunto y otro conjunto.</li>
+<li><strong>union()</strong>. Retorna el conjunto unión de conjuntos.</li>
+<li><strong>update()</strong>. Actualiza el conjunto con otro conjunto, o cualquier otro dato iterable.</li>
+</ul>
+<h2 id="casting"><FONT COLOR=#007575><strong>Casting</strong></font><a class="headerlink" href="#casting" title="Permanent link">&para;</a></h2>
+<p>Hacer casting es convertir de un tipo de dato a otro. Es decir, podemos convertir los tipos <code>int</code>, <code>float</code> o <code>string</code> de uno a otro.</p>
+<p>En Python existen dos tipos de <em>cast</em>:</p>
+<ul>
+<li><strong>Implicita</strong>. Es la que realiza Python cuando tiene que trabjar con dos tipos distintos de datos. Se realiza de manera automática sin que intervengamos, pero es importante saber lo que está pasando realmente si no queremos tener problemas futuros. Vamos a ver un ejemplo en el que tenemos dos tipos de datos, uno <code>int</code> y otro <code>float</code> y operamos con ellos.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1"></a><a href="#__codelineno-57-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">entero</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-57-2" name="__codelineno-57-2"></a><a href="#__codelineno-57-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="n">real</span> <span class="o">=</span> <span class="mf">3.5</span>
+<a id="__codelineno-57-3" name="__codelineno-57-3"></a><a href="#__codelineno-57-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">suma</span> <span class="o">=</span> <span class="n">entero</span> <span class="o">+</span> <span class="n">real</span>
+<a id="__codelineno-57-4" name="__codelineno-57-4"></a><a href="#__codelineno-57-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="n">diferencia</span> <span class="o">=</span> <span class="n">entero</span> <span class="o">-</span> <span class="n">real</span>
+<a id="__codelineno-57-5" name="__codelineno-57-5"></a><a href="#__codelineno-57-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="n">producto</span> <span class="o">=</span> <span class="n">entero</span> <span class="o">*</span> <span class="n">real</span>
+<a id="__codelineno-57-6" name="__codelineno-57-6"></a><a href="#__codelineno-57-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La suma es:&quot;</span><span class="p">,</span> <span class="n">suma</span><span class="p">)</span>
+<a id="__codelineno-57-7" name="__codelineno-57-7"></a><a href="#__codelineno-57-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La diferencia es:&quot;</span><span class="p">,</span><span class="n">diferencia</span><span class="p">)</span>
+<a id="__codelineno-57-8" name="__codelineno-57-8"></a><a href="#__codelineno-57-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El producto es:&quot;</span><span class="p">,</span><span class="n">producto</span><span class="p">)</span>
+<a id="__codelineno-57-9" name="__codelineno-57-9"></a><a href="#__codelineno-57-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="n">cadena</span> <span class="o">=</span><span class="s2">&quot;2&quot;</span>
+<a id="__codelineno-57-10" name="__codelineno-57-10"></a><a href="#__codelineno-57-10"><span class="linenos" data-linenos="10 "></span></a><span class="n">cociente</span> <span class="o">=</span> <span class="n">entero</span> <span class="o">/</span> <span class="n">cadena</span>
+</code></pre></div>
+<p>El resultado es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1"></a><a href="#__codelineno-58-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">La</span> <span class="n">suma</span> <span class="n">es</span><span class="p">:</span> <span class="mf">8.5</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2"></a><a href="#__codelineno-58-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">La</span> <span class="n">diferencia</span> <span class="n">es</span><span class="p">:</span> <span class="mf">1.5</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3"></a><a href="#__codelineno-58-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">El</span> <span class="n">producto</span> <span class="n">es</span><span class="p">:</span> <span class="mf">17.5</span>
+<a id="__codelineno-58-4" name="__codelineno-58-4"></a><a href="#__codelineno-58-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5"></a><a href="#__codelineno-58-5"><span class="linenos" data-linenos="5 "></span></a>  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">10</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<a id="__codelineno-58-6" name="__codelineno-58-6"></a><a href="#__codelineno-58-6"><span class="linenos" data-linenos="6 "></span></a><span class="ne">TypeError</span><span class="p">:</span> <span class="n">unsupported</span> <span class="n">types</span> <span class="k">for</span> <span class="fm">__truediv__</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;str&#39;</span>
+</code></pre></div>
+<p>El error se produce porque es evidente que no se puede dividir un número por la cadena "2". Imagenemos que en lugar de "2" la cadena fuese "Hola mundo!" ¿como vamos a realizar esa división?.</p>
+<p>Es evidente entonces que Python realiza un <code>cast()</code> de forma automática si los datos son congruentes entre si.</p>
+<ul>
+<li><strong>Explicita</strong>. Es la que realizamos nosotros y se  puede realizar a partir de las funciones que tiene Python. Las funciones mas comunes para hacer <code>cast()</code> son las siguientes:</li>
+</ul>
+<blockquote>
+<ul>
+<li>float()</li>
+<li>str()</li>
+<li>int()</li>
+<li>list()</li>
+<li>set()</li>
+<li>hex()</li>
+<li>oct()</li>
+<li>bin()</li>
+</ul>
+</blockquote>
+<h3 id="conversion-float-a-int"><FONT COLOR=#AA0000>Conversion <code>float</code> a <code>int</code></font><a class="headerlink" href="#conversion-float-a-int" title="Permanent link">&para;</a></h3>
+<p>Para convertir un <code>float</code> en un <code>int</code> basta con utilizar la función <code>int()</code> teniendo en cuenta que perderemos la parte fraccionaria del número.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1"></a><a href="#__codelineno-59-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="mf">3.45</span>
+<a id="__codelineno-59-2" name="__codelineno-59-2"></a><a href="#__codelineno-59-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># y toma el valor 3 desapareciendo el 0.45</span>
+<a id="__codelineno-59-3" name="__codelineno-59-3"></a><a href="#__codelineno-59-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1"># da como resultado 3</span>
+</code></pre></div>
+<h3 id="conversion-float-a-string"><FONT COLOR=#AA0000>Conversion <code>float</code> a <code>string</code></font><a class="headerlink" href="#conversion-float-a-string" title="Permanent link">&para;</a></h3>
+<p>Para convertir un <code>float</code> en un <code>string</code> vamos a utilizar la función <code>str()</code>. En el ejemplo como hacerlo con un dato mediante <code>casting</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1"></a><a href="#__codelineno-60-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="mf">5.5</span> <span class="c1"># tipo float</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2"></a><a href="#__codelineno-60-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># da como salida &lt;class &#39;float&#39;&gt;</span>
+<a id="__codelineno-60-3" name="__codelineno-60-3"></a><a href="#__codelineno-60-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># casting de x y lo guardamos en x</span>
+<a id="__codelineno-60-4" name="__codelineno-60-4"></a><a href="#__codelineno-60-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># da como salida &lt;class &#39;str&#39;&gt;</span>
+</code></pre></div>
+<h3 id="conversion-string-a-float"><FONT COLOR=#AA0000>Conversion <code>string</code> a <code>float</code></font><a class="headerlink" href="#conversion-string-a-float" title="Permanent link">&para;</a></h3>
+<p>Se puede convertir una cadena numérica en un float utilizando <code>float()</code>. Es importante entender que se pueden convertir cadenas que tengan sentido numérico y no cualquier cadena. En el ejemplo vemos la conversión correcta y la incorrecta que genera un error.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1"></a><a href="#__codelineno-61-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">cadena</span> <span class="o">=</span> <span class="s2">&quot;5.5&quot;</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2"></a><a href="#__codelineno-61-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-61-3" name="__codelineno-61-3"></a><a href="#__codelineno-61-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">y</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="c1"># siempre hay que usar punto como separador decimal</span>
+<a id="__codelineno-61-4" name="__codelineno-61-4"></a><a href="#__codelineno-61-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">cadena2</span> <span class="o">=</span> <span class="s2">&quot;Hola&quot;</span>
+<a id="__codelineno-61-5" name="__codelineno-61-5"></a><a href="#__codelineno-61-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cadena</span><span class="p">)</span> <span class="c1"># cast de cadena</span>
+<a id="__codelineno-61-6" name="__codelineno-61-6"></a><a href="#__codelineno-61-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="o">/</span><span class="n">x</span> <span class="c1"># operamos entre cast de cadena y numero</span>
+<a id="__codelineno-61-7" name="__codelineno-61-7"></a><a href="#__codelineno-61-7"><span class="linenos" data-linenos="7 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-61-8" name="__codelineno-61-8"></a><a href="#__codelineno-61-8"><span class="linenos" data-linenos="8 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">cadena2</span><span class="p">))</span> <span class="c1"># conversion imposible</span>
+</code></pre></div>
+<p>Nos genera el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1"></a><a href="#__codelineno-62-1"><span class="linenos" data-linenos="1 "></span></a><span class="mf">2.75</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2"></a><a href="#__codelineno-62-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3"></a><a href="#__codelineno-62-3"><span class="linenos" data-linenos="3 "></span></a>  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<a id="__codelineno-62-4" name="__codelineno-62-4"></a><a href="#__codelineno-62-4"><span class="linenos" data-linenos="4 "></span></a><span class="ne">ValueError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span> <span class="k">for</span> <span class="n">number</span>
+</code></pre></div>
+<h3 id="conversion-string-a-int"><FONT COLOR=#AA0000>Conversion <code>string</code> a <code>int</code></font><a class="headerlink" href="#conversion-string-a-int" title="Permanent link">&para;</a></h3>
+<p>Totalmente similar a la conversión de <code>string</code> a <code>float</code> utilizando la función <code>int()</code>. Un ejemplo similar nos lo aclara mejor:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1"></a><a href="#__codelineno-63-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">cadena</span> <span class="o">=</span> <span class="s2">&quot;5&quot;</span>
+<a id="__codelineno-63-2" name="__codelineno-63-2"></a><a href="#__codelineno-63-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-63-3" name="__codelineno-63-3"></a><a href="#__codelineno-63-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-63-4" name="__codelineno-63-4"></a><a href="#__codelineno-63-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">cadena2</span> <span class="o">=</span> <span class="s2">&quot;Hola&quot;</span>
+<a id="__codelineno-63-5" name="__codelineno-63-5"></a><a href="#__codelineno-63-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cadena</span><span class="p">)</span> <span class="c1"># cast de cadena</span>
+<a id="__codelineno-63-6" name="__codelineno-63-6"></a><a href="#__codelineno-63-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="o">/</span><span class="n">x</span> <span class="c1"># operamos entre cast de cadena y numero</span>
+<a id="__codelineno-63-7" name="__codelineno-63-7"></a><a href="#__codelineno-63-7"><span class="linenos" data-linenos="7 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># resultado float por cast implicito</span>
+<a id="__codelineno-63-8" name="__codelineno-63-8"></a><a href="#__codelineno-63-8"><span class="linenos" data-linenos="8 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">cadena2</span><span class="p">))</span> <span class="c1"># conversion imposible</span>
+</code></pre></div>
+<p>Que nos devuelve el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1"></a><a href="#__codelineno-64-1"><span class="linenos" data-linenos="1 "></span></a><span class="mf">2.5</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2"></a><a href="#__codelineno-64-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<a id="__codelineno-64-3" name="__codelineno-64-3"></a><a href="#__codelineno-64-3"><span class="linenos" data-linenos="3 "></span></a>  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<a id="__codelineno-64-4" name="__codelineno-64-4"></a><a href="#__codelineno-64-4"><span class="linenos" data-linenos="4 "></span></a><span class="ne">ValueError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span> <span class="k">for</span> <span class="n">integer</span> <span class="k">with</span> <span class="n">base</span> <span class="mi">10</span>
+</code></pre></div>
+<h3 id="conversion-int-a-string"><FONT COLOR=#AA0000>Conversion <code>int</code> a <code>string</code></font><a class="headerlink" href="#conversion-int-a-string" title="Permanent link">&para;</a></h3>
+<p>Esta conversión se realiza con str(). Es una conversión que siempre es realizable porque cualquier número entero es susceptible de convertirse en una cadena.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1"></a><a href="#__codelineno-65-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># tipo int</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2"></a><a href="#__codelineno-65-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># da como salida &lt;class &#39;int&#39;&gt;</span>
+<a id="__codelineno-65-3" name="__codelineno-65-3"></a><a href="#__codelineno-65-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">x</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># casting de x y lo guardamos en x</span>
+<a id="__codelineno-65-4" name="__codelineno-65-4"></a><a href="#__codelineno-65-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># da como salida &lt;class &#39;str&#39;&gt;</span>
+</code></pre></div>
+<h3 id="conversion-entre-list-y-set"><FONT COLOR=#AA0000>Conversion entre <code>list</code> y <code>set</code></font><a class="headerlink" href="#conversion-entre-list-y-set" title="Permanent link">&para;</a></h3>
+<p>Es posibles hacer cast a lista con list(). Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1"></a><a href="#__codelineno-66-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2"></a><a href="#__codelineno-66-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3"></a><a href="#__codelineno-66-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>
+<a id="__codelineno-66-4" name="__codelineno-66-4"></a><a href="#__codelineno-66-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">lista</span><span class="p">))</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1"></a><a href="#__codelineno-67-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">set</span><span class="s1">&#39;&gt;</span>
+<a id="__codelineno-67-2" name="__codelineno-67-2"></a><a href="#__codelineno-67-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+</code></pre></div>
+<p>De manera similar es posible convertir unalista en un set utilizando <code>set()</code>. Por ejemplo</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1"></a><a href="#__codelineno-68-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">lista</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2"></a><a href="#__codelineno-68-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+<a id="__codelineno-68-3" name="__codelineno-68-3"></a><a href="#__codelineno-68-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">lista</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">lista</span><span class="p">))</span>
+<a id="__codelineno-68-4" name="__codelineno-68-4"></a><a href="#__codelineno-68-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>
+</code></pre></div>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1"></a><a href="#__codelineno-69-1"><span class="linenos" data-linenos="1 "></span></a><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;</span>
+<a id="__codelineno-69-2" name="__codelineno-69-2"></a><a href="#__codelineno-69-2"><span class="linenos" data-linenos="2 "></span></a><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">set</span><span class="s1">&#39;&gt;</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 - 2035 Federico Coca
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://x.com/fgcoca" target="_blank" rel="noopener" title="X de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/fgcoca" target="_blank" rel="noopener" title="Github de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.instagram.com/cocafederico/?hl=es" target="_blank" rel="noopener" title="Instagram de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://x.com/clubroboticagra" target="_blank" rel="noopener" title="X de Club Robótica Granada" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="../../plugins/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
