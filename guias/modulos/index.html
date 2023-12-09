@@ -18,7 +18,7 @@
         <link rel="prev" href="../poo/">
       
       
-        <link rel="next" href="../../upy/func_ref/">
+        <link rel="next" href="../rand/">
       
       
       <link rel="icon" href="../../img/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Módulos - Mis notas de pico explorer</title>
+        <title>Módulos en Python - Mis notas de pico explorer</title>
       
     
     
@@ -127,7 +127,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Módulos
+              Módulos en Python
             
           </span>
         </div>
@@ -800,6 +800,44 @@
     
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Módulos
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            Módulos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -812,7 +850,7 @@
           
   
   <span class="md-ellipsis">
-    Módulos
+    Módulos en Python
   </span>
   
 
@@ -823,7 +861,7 @@
         
   
   <span class="md-ellipsis">
-    Módulos
+    Módulos en Python
   </span>
   
 
@@ -852,6 +890,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#directorios-y-sus-rutas" class="md-nav__link">
+    Directorios y sus rutas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#modulos-personalizados" class="md-nav__link">
     Módulos personalizados
   </a>
@@ -861,6 +906,34 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Módulo random
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -1179,6 +1252,26 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A07/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A07
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1346,6 +1439,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#directorios-y-sus-rutas" class="md-nav__link">
+    Directorios y sus rutas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#modulos-personalizados" class="md-nav__link">
     Módulos personalizados
   </a>
@@ -1368,9 +1468,118 @@
 
 
 <h1 id="modulos-en-python"><FONT COLOR=#8B008B>Módulos en Python</font><a class="headerlink" href="#modulos-en-python" title="Permanent link">&para;</a></h1>
+<p>Antes de nada decir que vamos a realizar una pasada bastante rápida por el tema y que no es ni mucho menos todo lo que hay que decir sobre los módulos, los paquetes y las librerías, el tema es mas complejo, pero dada la utilidad que nosotros le vamos a dar, entiendo que con esto será suficiente. Si se necesita se puede consultar la documentación de <a href="https://www.python.org/">Python en español</a> y en concreto la de <a href="https://docs.python.org/es/3/tutorial/modules.html">módulos</a>.</p>
 <h2 id="introduccion"><FONT COLOR=#007575><strong>Introducción</strong></font><a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Los módulos con archivos .py que pueden contiener funciones, variables o clases y que se pueden usar por otros módulos. Fundamentalmente sirven para reutilizar código. Vamos a analizar su funcionamiento en base a un ejemplo muy sencillo en el que definimos un módulo para sumar, restar, multiplicar y dividir dos números x e y.</p>
+<p>El módulo sería:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">def</span> <span class="nf">suma</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><a href="#__codelineno-0-2"><span class="linenos" data-linenos="2 "></span></a>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><a href="#__codelineno-0-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">def</span> <span class="nf">resta</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><a href="#__codelineno-0-4"><span class="linenos" data-linenos="4 "></span></a>    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><a href="#__codelineno-0-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">def</span> <span class="nf">producto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><a href="#__codelineno-0-6"><span class="linenos" data-linenos="6 "></span></a>    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><a href="#__codelineno-0-7"><span class="linenos" data-linenos="7 "></span></a><span class="k">def</span> <span class="nf">division</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><a href="#__codelineno-0-8"><span class="linenos" data-linenos="8 "></span></a>    <span class="k">return</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span>
+</code></pre></div>
+<p>Podemos observar que se han definido las funciones necesarias para realizar las operaciones citadas y retornas el resultado. Este módulo por si solo no hace nada pues no puede retornar valores si no recibe parámetros.</p>
+<p>Vamos a implementar ahora un programa que utilice este módulo, sería:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">import</span> <span class="nn">modulo_tonto</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><a href="#__codelineno-1-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">modulo_tonto</span><span class="o">.</span><span class="n">suma</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><a href="#__codelineno-1-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">modulo_tonto</span><span class="o">.</span><span class="n">resta</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><a href="#__codelineno-1-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">modulo_tonto</span><span class="o">.</span><span class="n">producto</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><a href="#__codelineno-1-6"><span class="linenos" data-linenos="6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">modulo_tonto</span><span class="o">.</span><span class="n">division</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre></div>
+<p>Pero <FONT COLOR=#FF0000><strong>ATENCIÓN</strong></font>, la situación que debemos tener en Thonny es la de la siguiente imagen:</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/programa_tonto.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Situación en Thonny para importar módulos" src="../../img/up/programa_tonto.png" /></a><br />
+<em>Situación en  Thonny para importar módulos</em></p>
+<p></center></p>
+<p>Recuerdese que para subir archivos a la Pi Pico basta con hacer clic derecho sobre el nombre del archivo y escoger <em>Subir a  /</em> del menú contextual.</p>
+<p>La importación del módulo se puede realizar también de la siguiente forma:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">from</span> <span class="nn">modulo_tonto</span> <span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">suma</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">resta</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><a href="#__codelineno-2-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">producto</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><a href="#__codelineno-2-6"><span class="linenos" data-linenos="6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">division</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre></div>
+<p>Donde observamos queahora las funciones se invocan directamente y no a través del nombre del módulo. El resultado de la salida es exactamente el mismo que antes.</p>
+<p>También es posible importa solamente ciertos componentes, tal y como vemos a continuación:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">from</span> <span class="nn">modulo_tonto</span> <span class="kn">import</span> <span class="n">suma</span><span class="p">,</span> <span class="n">producto</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><a href="#__codelineno-3-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">suma</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><a href="#__codelineno-3-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">producto</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><a href="#__codelineno-3-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">division</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre></div>
+<p>Que nos genera la siguiente salida:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos="1 "></span></a>10
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos="2 "></span></a>25
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos="3 "></span></a>Traceback (most recent call last):
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><a href="#__codelineno-4-4"><span class="linenos" data-linenos="4 "></span></a>  File &quot;&lt;stdin&gt;&quot;, line 5, in &lt;module&gt;
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><a href="#__codelineno-4-5"><span class="linenos" data-linenos="5 "></span></a>NameError: name &#39;division&#39; isn&#39;t defined
+</code></pre></div>
+<p>El error es evidentemente porque, aunque la función está definida en el módulo, esta no se ha importado y no es posible invocarla.</p>
+<p>Cuando importamos un módulo es posible cambiarle el nombre de forma sencilla. Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">import</span> <span class="nn">modulos.modulo_tonto</span> <span class="k">as</span> <span class="nn">mt</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos="3 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">mt</span><span class="o">.</span><span class="n">suma</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos="4 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">mt</span><span class="o">.</span><span class="n">resta</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos="5 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">mt</span><span class="o">.</span><span class="n">producto</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><a href="#__codelineno-5-6"><span class="linenos" data-linenos="6 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">mt</span><span class="o">.</span><span class="n">division</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="directorios-y-sus-rutas"><FONT COLOR=#007575><strong>Directorios y sus rutas</strong></font><a class="headerlink" href="#directorios-y-sus-rutas" title="Permanent link">&para;</a></h2>
+<p>Como hemos visto en los ejemplos anteriores es habitual que los módulos estén situados en el mismo directorio que el archivo de proyecto, pero cuando se trabaja con programas mas extensos que usan varios módulos y archivos auxiliares, lo mas comodo va a ser tenerlo organizados por directorios.</p>
+<p>Aunque por su sencillez no es necesario, lo vamos a hacer con el ejemplo anterior. Si partimos de la situación de la imagen inicial de la animación siguiente se nos producirá un error al intentar ejecutar el programa.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/modulo_tonto_dir.gif" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Situación en Thonny con módulo en directorio" src="../../img/up/modulo_tonto_dir.gif" /></a><br />
+<em>Situación en Thonny con módulo en directorio</em></p>
+<p></center></p>
+<p>En la misma animación se ve como acceder al directorio del módulo y solucionar el problema anterior.</p>
+<p>Es importante conocer la forma en que Python busca los módulos. Inicialmente, cuando se importa un módulo, Python intenta buscar en los directorios indicados en el archivo <code>sys.path</code>. Con un sencillo programa es posible consultar <code>sys.path</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">import</span> <span class="nn">sys</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos="2 "></span></a><span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+</code></pre></div>
+<p>Que nos devolverá una lista de los directorios y el orden en que buscará.</p>
+<p>Al tratarse de un fichero de sistema no se recomienda su modificación porque podemos estropear algo sin querer.</p>
+<p>Es posible ver lon nombres de variables, funciones, clases, etc que están en nuestro <code>namespace</code> mediante la función <code>dir()</code>:</p>
+<ul>
+<li>Sobre un módulo vacio veremos los nombres por defecto que ha generado Python:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos="1 "></span></a><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">())</span>
+</code></pre></div>
+<p>La lista que devuelve es <code>['machine', 'cppmem', '__name__', 'rp2']</code>.</p>
+<p>Si hacemos la consulta en un programa como el del ejemplo que llevamos viendo devolverá algo como:</p>
+<p><code>['machine', 'producto', '__name__', 'cppmem', 'division', 'rp2', 'resta', 'suma']</code></p>
+<p>Donde podemos apreciar como aparecen también las funciones creadas por nosotros.</p>
 <h2 id="modulos-personalizados"><FONT COLOR=#007575><strong>Módulos personalizados</strong></font><a class="headerlink" href="#modulos-personalizados" title="Permanent link">&para;</a></h2>
 <p>Cada archivo con extensión .py, si está almacenado en el sistema de archivos de Raspberry Pi Pico, es un módulo. Si queremos importar un módulo personalizado su archivo debe estar ubicado en la ruta de la variable de entorno de MicroPython o en la misma ruta que el programa que está en ejecución.</p>
+<p>Vamos a ver un ejemplo trabajando con la función <code>main()</code>. </p>
+<ul>
+<li>Primero, creamos un módulo python "aleatorio_0_99.py" en un directorio que denominaremos "mi_funcion" y le escribimos el siguiente código:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">import</span> <span class="nn">random</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><a href="#__codelineno-8-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">def</span> <span class="nf">aleatorio</span><span class="p">():</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><a href="#__codelineno-8-4"><span class="linenos" data-linenos="4 "></span></a>    <span class="n">num_aleatorio</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><a href="#__codelineno-8-5"><span class="linenos" data-linenos="5 "></span></a>    <span class="k">return</span> <span class="n">num_aleatorio</span>
+</code></pre></div>
+<p>Una vez acabado de escribir el código subimos el módulo a la Pi Pico.</p>
+<ul>
+<li>Segundo, creamos un nuevo archivo de nombre "main.py", importamos el módulo anterior y escribimos el siguiente código:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">import</span> <span class="nn">aleatorio_0_99</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><a href="#__codelineno-9-2"><span class="linenos" data-linenos="2 "></span></a><span class="kn">import</span> <span class="nn">time</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><a href="#__codelineno-9-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><a href="#__codelineno-9-4"><span class="linenos" data-linenos="4 "></span></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><a href="#__codelineno-9-5"><span class="linenos" data-linenos="5 "></span></a>    <span class="nb">print</span><span class="p">(</span><span class="n">aleatorio_0_99</span><span class="o">.</span><span class="n">aleatorio</span><span class="p">())</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><a href="#__codelineno-9-6"><span class="linenos" data-linenos="6 "></span></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<p>En la animación vemos su funcionamiento generando un número aleatorio cada tres segundos. Al tener un archivo <code>main.py</code> en la Pi Pico el programa se ejecutará con solo alimentar la misma sin necesidad de estar conectado a un ordenador.</p>
+<p><center></p>
+<p><a class="glightbox" href="../../img/up/generando_aleatorios.gif" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Ejemplo de generación de aleatorios" src="../../img/up/generando_aleatorios.gif" /></a><br />
+<em>Ejemplo de generación de aleatorios</em></p>
+<p></center></p>
 
 
 
