@@ -1,7 +1,11 @@
 
 Tabulación * [ ] Al principio de una lista pone una tabulación y omite el *
 
+Todos los detalles de las funciones están en el módulo [xx](). Aquí solamente se citan.
+
 <FONT COLOR=#BB00FF><font size="5"><b>aa</font color></font size></b>
+
+
 
 # <FONT COLOR=#8B008B>tt</font>
 
@@ -36,7 +40,7 @@ Se explican los siguientes aspectos:
 
 ### <FONT COLOR=#AA0000>Código</font>
 
-### <FONT COLOR=#AA0000>Explicación</font>
+#### <FONT COLOR=#880088>Pines</font>
 
 El programa lo podemos descargar de:
 
@@ -76,3 +80,20 @@ En un sitio se pone la etiqueta : <a name="ejecutar"></a>
 y en otro se crea el enlace
 
 <center>Firmware y software -> Software Thonny -> [Ejecutando código](../up/soft.md/#ejecutar)</center>
+
+<div class="cuadrado">
+
+~~~py
+xx
+~~~
+
+</div>
+<style>
+.cuadrado{
+padding:5px;
+margin:5px;
+background-color: #FFFFDD;
+border: solid 2px #FFFFA0;
+color: black;
+}
+</style>

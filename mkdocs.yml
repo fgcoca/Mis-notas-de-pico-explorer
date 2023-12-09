@@ -44,15 +44,27 @@ nav:
     - Permisos en Linux: guias/permisos.md
     - Sintaxis en Python: guias/sintaxis.md
     - Datos en Python: guias/datos.md
+    - Estructuras de datos en Python: guias/estr_datos.md
     - Operadores en Python: guias/operaradores.md
     - Estructuras de control: guias/control.md
     - Programacion Orientada a Objetos: guias/poo.md
+    - Módulos: 
+      - Módulos en Python: guias/modulos.md
+      - Módulo random: guias/rand.md
   - MicroPython:
+    - Funciones de referencia de la placa Pico Explorer: upy/func_ref.md
+    - La libreria PicoGrphics: upy/picographics.md
     - Guía de refencia rápida de RP2: upy/rapida.md
     - Referencias a clases: upy/ref_clases.md 
   - Actividades:
     - Estructura: actividades/estructura.md 
-    - Actividad A01: actividades/A01.md  
+    - Actividad A01: actividades/A01.md
+    - Actividad A02: actividades/A02.md
+    - Actividad A03: actividades/A03.md
+    - Actividad A04: actividades/A04.md
+    - Actividad A05: actividades/A05.md
+    - Actividad A06: actividades/A06.md
+    - Actividad A07: actividades/A07.md
   # Aqui todas las entradas
   - Miscelanea:
     - Autor: Miscelanea/about.md 
@@ -163,7 +175,7 @@ extra_javascript:
 # 9. Plugins
 plugins:
   - search:
-      lang: es, en
+      lang: es
       separator: '[\s\-,:!=\[\]()"/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - glightbox:
       touchNavigation: true

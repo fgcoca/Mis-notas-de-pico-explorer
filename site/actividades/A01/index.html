@@ -18,7 +18,7 @@
         <link rel="prev" href="../estructura/">
       
       
-        <link rel="next" href="../../Miscelanea/about/">
+        <link rel="next" href="../A02/">
       
       
       <link rel="icon" href="../../img/favicon.png">
@@ -92,7 +92,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#a01parpadeo-onboard" class="md-skip">
+        <a href="#a01parpadeo-led-onboard" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -281,7 +281,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../upy/rapida/" class="md-tabs__link">
+        <a href="../../upy/func_ref/" class="md-tabs__link">
           
   
   MicroPython
@@ -717,6 +717,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guias/estr_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de datos en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guias/operaradores/" class="md-nav__link">
         
   
@@ -771,6 +791,26 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/modulos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Módulos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -816,6 +856,46 @@
             MicroPython
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../upy/func_ref/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones de referencia de la placa Pico Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../upy/picographics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La libreria PicoGrphics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1028,6 +1108,106 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A06
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1255,21 +1435,20 @@
                   
 
 
-<h1 id="a01parpadeo-onboard"><FONT COLOR=#8B008B>A01.Parpadeo onboard</font><a class="headerlink" href="#a01parpadeo-onboard" title="Permanent link">&para;</a></h1>
+<h1 id="a01parpadeo-led-onboard"><FONT COLOR=#8B008B>A01.Parpadeo LED onboard</font><a class="headerlink" href="#a01parpadeo-led-onboard" title="Permanent link">&para;</a></h1>
 <p>Esta actividad marca el punto de partida en la construcción y exploración de proyectos electrónicos con Raspberry Pi Pico.</p>
 <p>Utilizaremos esta actividad para introducir conocimientos referentes a la carga de programas en la Pi Pico, como se importan archivos Python y por supuesto veremos los conocimientos de Python necesarios para un mejor entendimiento de la misma.</p>
 <h2 id="enunciado"><FONT COLOR=#007575><strong>Enunciado</strong></font><a class="headerlink" href="#enunciado" title="Permanent link">&para;</a></h2>
 <p>Se trata de hacer parpadear el LED que incorpora la placa Pi Pico próximo al conector USB que está conectado a GP25.</p>
 <h2 id="lista-de-componentes"><FONT COLOR=#007575><strong>Lista de componentes</strong></font><a class="headerlink" href="#lista-de-componentes" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>*</strong> 1 Raspberry Pi Pico o Pico W</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>*</strong> 1 Cable USB A a USB micro que utilizaremos para programar y alimentar la Pi Pico</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>-</strong> Placa pico explorer con Pi Pico</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>-</strong> 1 Cable USB A a USB micro que utilizaremos para programar y alimentar la Pi Pico</li>
 </ul>
 <h2 id="esquema-del-circuito"><FONT COLOR=#007575><strong>Esquema del circuito</strong></font><a class="headerlink" href="#esquema-del-circuito" title="Permanent link">&para;</a></h2>
 <p>Es tan simple como conectar la Pi Pico al ordenador mediante el cable USB.</p>
 <p><center></p>
-<p><a class="glightbox" href="../../img/activ/A01_e.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A01" src="../../img/activ/A01_e.png" /></a><br />
-<em>A01</em></p>
+<p><a class="glightbox" href="../../img/activ/A01_e.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="A01" src="../../img/activ/A01_e.png" /></a>  </p>
 <p></center></p>
 <h2 id="programa"><FONT COLOR=#007575><strong>Programa</strong></font><a class="headerlink" href="#programa" title="Permanent link">&para;</a></h2>
 <h3 id="codigo"><FONT COLOR=#AA0000>Código</font><a class="headerlink" href="#codigo" title="Permanent link">&para;</a></h3>

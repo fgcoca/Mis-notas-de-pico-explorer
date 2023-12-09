@@ -1,0 +1,2208 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Pico Explorer Base es una placa de expansión para la Raspberry Pi Pico o Pico W que permitir realizar diversos experimentos. La placa incluye componentes como una mini protoboard, controladores de motor, cables ADC y GPIO, altavoz, pantalla con cuatro pulsadores, interruptores y conectores de Breakout Garden para el módulo de expansión.">
+      
+      
+        <meta name="author" content="Federico Coca">
+      
+      
+        <link rel="canonical" href="https://fgcoca.github.io/Mis-notas-de-pico-explorer/upy/picographics/">
+      
+      
+        <link rel="prev" href="../func_ref/">
+      
+      
+        <link rel="next" href="../rapida/">
+      
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
+    
+    
+      
+        <title>La libreria PicoGrphics - Mis notas de pico explorer</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6a10b989.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="deep-purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#la-libreria-picogrphics" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Mis notas de pico explorer" class="md-header__button md-logo" aria-label="Mis notas de pico explorer" data-md-component="logo">
+      
+  <img src="../../img/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mis notas de pico explorer
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              La libreria PicoGrphics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="deep-purple"  aria-label="Modo Oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Oscuro" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="deep-purple"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fgcoca/Mis-notas-de-pico-explorer" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fgcoca/Mis-notas-de-pico-explorer
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Introducción
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../up/firm/" class="md-tabs__link">
+          
+  
+  Firmware y software
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guias/intro/" class="md-tabs__link">
+          
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../func_ref/" class="md-tabs__link">
+          
+  
+  MicroPython
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../actividades/estructura/" class="md-tabs__link">
+          
+  
+  Actividades
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Miscelanea/about/" class="md-tabs__link">
+          
+  
+  Miscelanea
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Mis notas de pico explorer" class="md-nav__button md-logo" aria-label="Mis notas de pico explorer" data-md-component="logo">
+      
+  <img src="../../img/favicon.png" alt="logo">
+
+    </a>
+    Mis notas de pico explorer
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fgcoca/Mis-notas-de-pico-explorer" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fgcoca/Mis-notas-de-pico-explorer
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducción
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La placa Pico Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/inicio_pi_pico/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio con Raspberry Pi Pico
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/pi_pico_picoW/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    La Pi Pico y Pico W
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../inicio/inicio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Como comenzar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Firmware y software
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Firmware y software
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../up/firm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firmware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../up/soft/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software Thonny
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/permisos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permisos en Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/sintaxis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sintaxis en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datos en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/estr_datos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de datos en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/operaradores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operadores en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructuras de control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Programacion Orientada a Objetos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/modulos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Módulos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    MicroPython
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MicroPython
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../func_ref/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funciones de referencia de la placa Pico Explorer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    La libreria PicoGrphics
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    La libreria PicoGrphics
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-pico-grphics" class="md-nav__link">
+    Configuración de Pico Grphics
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de Pico Grphics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pantallas-compatibles" class="md-nav__link">
+    Pantallas compatibles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuraciones-disponibles" class="md-nav__link">
+    Configuraciones disponibles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modos-graficos-soportados-tipo-de-pluma" class="md-nav__link">
+    Modos gráficos soportados (tipo de pluma)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotaciones" class="md-nav__link">
+    Rotaciones
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pines-personalizados" class="md-nav__link">
+    Pines personalizados
+  </a>
+  
+    <nav class="md-nav" aria-label="Pines personalizados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spiparalelo" class="md-nav__link">
+    SPI/paralelo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i2c" class="md-nav__link">
+    I2C
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones" class="md-nav__link">
+    Funciones
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generales" class="md-nav__link">
+    Generales
+  </a>
+  
+    <nav class="md-nav" aria-label="Generales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-y-configurar-plumas" class="md-nav__link">
+    Crear y configurar plumas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#luz-de-fondo" class="md-nav__link">
+    Luz de fondo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limites-de-dibujo" class="md-nav__link">
+    Límites de dibujo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limpiar" class="md-nav__link">
+    Limpiar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar" class="md-nav__link">
+    Actualizar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limites" class="md-nav__link">
+    Límites
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#texto" class="md-nav__link">
+    Texto
+  </a>
+  
+    <nav class="md-nav" aria-label="Texto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cambiar-fuente" class="md-nav__link">
+    Cambiar fuente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#espesor" class="md-nav__link">
+    Espesor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dibujando-texto" class="md-nav__link">
+    Dibujando texto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formas-basicas" class="md-nav__link">
+    Formas básicas
+  </a>
+  
+    <nav class="md-nav" aria-label="Formas básicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linea" class="md-nav__link">
+    Línea
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circulo" class="md-nav__link">
+    Círculo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangulo" class="md-nav__link">
+    Rectángulo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangulo" class="md-nav__link">
+    Triángulo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poligono" class="md-nav__link">
+    Polígono
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-dibujo" class="md-nav__link">
+    Ejemplo de dibujo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pixeles" class="md-nav__link">
+    Pixeles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-de-paletas" class="md-nav__link">
+    Gestion de paletas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rapida/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de refencia rápida de RP2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ref_clases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Referencias a clases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Actividades
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Actividades
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/estructura/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Estructura
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A02
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A03
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A04
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A05
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/A06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Actividad A06
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Miscelanea
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Miscelanea
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/lic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licencias
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/webgrafia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Webgrafia/Bibliografía
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Miscelanea/soft/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software utilizado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-pico-grphics" class="md-nav__link">
+    Configuración de Pico Grphics
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de Pico Grphics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pantallas-compatibles" class="md-nav__link">
+    Pantallas compatibles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuraciones-disponibles" class="md-nav__link">
+    Configuraciones disponibles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modos-graficos-soportados-tipo-de-pluma" class="md-nav__link">
+    Modos gráficos soportados (tipo de pluma)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotaciones" class="md-nav__link">
+    Rotaciones
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pines-personalizados" class="md-nav__link">
+    Pines personalizados
+  </a>
+  
+    <nav class="md-nav" aria-label="Pines personalizados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spiparalelo" class="md-nav__link">
+    SPI/paralelo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i2c" class="md-nav__link">
+    I2C
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones" class="md-nav__link">
+    Funciones
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generales" class="md-nav__link">
+    Generales
+  </a>
+  
+    <nav class="md-nav" aria-label="Generales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-y-configurar-plumas" class="md-nav__link">
+    Crear y configurar plumas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#luz-de-fondo" class="md-nav__link">
+    Luz de fondo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limites-de-dibujo" class="md-nav__link">
+    Límites de dibujo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limpiar" class="md-nav__link">
+    Limpiar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar" class="md-nav__link">
+    Actualizar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limites" class="md-nav__link">
+    Límites
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#texto" class="md-nav__link">
+    Texto
+  </a>
+  
+    <nav class="md-nav" aria-label="Texto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cambiar-fuente" class="md-nav__link">
+    Cambiar fuente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#espesor" class="md-nav__link">
+    Espesor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dibujando-texto" class="md-nav__link">
+    Dibujando texto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formas-basicas" class="md-nav__link">
+    Formas básicas
+  </a>
+  
+    <nav class="md-nav" aria-label="Formas básicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linea" class="md-nav__link">
+    Línea
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circulo" class="md-nav__link">
+    Círculo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangulo" class="md-nav__link">
+    Rectángulo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangulo" class="md-nav__link">
+    Triángulo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poligono" class="md-nav__link">
+    Polígono
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-dibujo" class="md-nav__link">
+    Ejemplo de dibujo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pixeles" class="md-nav__link">
+    Pixeles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-de-paletas" class="md-nav__link">
+    Gestion de paletas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="la-libreria-picogrphics"><FONT COLOR=#8B008B>La libreria PicoGrphics</font><a class="headerlink" href="#la-libreria-picogrphics" title="Permanent link">&para;</a></h1>
+<p>Pico Graphics es la biblioteca de visualización y gráficos para controlar pantallas desde la Pico en MicroPython.</p>
+<h2 id="configuracion-de-pico-grphics"><FONT COLOR=#007575><strong>Configuración de Pico Grphics</strong></font><a class="headerlink" href="#configuracion-de-pico-grphics" title="Permanent link">&para;</a></h2>
+<p>Para utilizar las funciones de la biblioteca tenemos que crear una instancia de PicoGrphics:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">from</span> <span class="nn">picographics</span> <span class="kn">import</span> <span class="n">PicoGraphics</span><span class="p">,</span> <span class="n">DISPLAY_LCD_160X80</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><a href="#__codelineno-0-2"><span class="linenos" data-linenos="2 "></span></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><a href="#__codelineno-0-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">pantalla</span> <span class="o">=</span> <span class="n">PicoGraphics</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="n">DISPLAY_LCD_160X80</span><span class="p">)</span>
+</code></pre></div>
+<p>La precaución a tener en cuenta es que MicroPython solamente dispone de 192 KB de RAM y una pantalla RGB de 320x240 utiliza 150 KB.</p>
+<h3 id="pantallas-compatibles"><FONT COLOR=#AA0000>Pantallas compatibles</font><a class="headerlink" href="#pantallas-compatibles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pantalla Pico - LCD SPI de 240x135 -<code>DISPLAY_PICO_DISPLAY</code></li>
+<li>Pantalla Pico 2 - LCD SPI de 320x240 -<code>DISPLAY_PICO_DISPLAY_2</code></li>
+<li>Tufty 2040 - LCD paralelo 320x240 -<code>DISPLAY_TUFTY_2040</code></li>
+<li><strong>Pico Explorer - LCD SPI de 240x240 -<code>DISPLAY_PICO_EXPLORER</code></strong></li>
+<li>Enviro Plus - LCD SPI de 240x240 -<code>DISPLAY_ENVIRO_PLUS</code></li>
+<li>Conexión LCD SPI redonda de 240x240 -<code>DISPLAY_ROUND_LCD_240X240</code></li>
+<li>Conexión LCD SPI cuadrada de 240x240 -<code>DISPLAY_LCD_240X240</code></li>
+<li>Conexión LCD SPI de 160x80 -<code>DISPLAY_LCD_160X80</code></li>
+<li>OLED 128x128 I2C -<code>DISPLAY_I2C_OLED_128X128</code></li>
+<li>Pico Inky Pack / Badger 2040 / Badger 2040 W - Tinta E monocromática 296x128 -<code>DISPLAY_INKY_PACK</code></li>
+<li>Inky Frame 5.7" - 600x448 Tinta electrónica de 7 colores -<code>DISPLAY_INKY_FRAME</code></li>
+<li>Inky Frame 4.0" - 640x400 Tinta electrónica de 7 colores -<code>DISPLAY_INKY_FRAME_4</code></li>
+<li>Inky Frame 7.3" - 800x480 Tinta electrónica de 7 colores -<code>DISPLAY_INKY_FRAME_7</code></li>
+<li>Paquete Pico GFX - Matriz LCD mono 128x64 -<code>DISPLAY_GFX_PACK</code></li>
+<li>Unicornio Galáctico - Matriz LED 53x11 ​​-<code>DISPLAY_GALACTIC_UNICORN</code></li>
+<li>Interstate75 y 75W - Controlador Matrix HUB75 - <code>DISPLAY_INTERSTATE75_SIZEOFMATRIX</code></li>
+<li>Unicornio Cósmico - Matriz LED 32x32 -<code>DISPLAY_COSMIC_UNICORN</code></li>
+<li>Unicornio Estelar - Matriz LED 16x16 -<code>DISPLAY_STELLAR_UNICORN</code></li>
+<li>Pack Pico Unicornio - Matriz LED 16x7 -<code>DISPLAY_UNICORN_PACK</code></li>
+</ul>
+<h3 id="configuraciones-disponibles"><FONT COLOR=#AA0000>Configuraciones disponibles</font><a class="headerlink" href="#configuraciones-disponibles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Matriz 32 x 32 -<code>DISPLAY_INTERSTATE75_32X32</code></li>
+<li>Matriz 64 x 32 -<code>DISPLAY_INTERSTATE75_64X32</code></li>
+<li>Matriz 96 x 32 -<code>DISPLAY_INTERSTATE75_96X32</code></li>
+<li>Matriz 128 x 32 -<code>DISPLAY_INTERSTATE75_128X32</code></li>
+<li>Matriz 64 x 64 -<code>DISPLAY_INTERSTATE75_64X64</code></li>
+<li>Matriz de 128 x 64 -<code>DISPLAY_INTERSTATE75_128X64</code></li>
+<li>Matriz de 192 x 64 -<code>DISPLAY_INTERSTATE75_192X64</code></li>
+<li>Matriz de 256 x 64 -<code>DISPLAY_INTERSTATE75_256X64</code></li>
+</ul>
+<h3 id="modos-graficos-soportados-tipo-de-pluma"><FONT COLOR=#AA0000>Modos gráficos soportados (tipo de pluma)</font><a class="headerlink" href="#modos-graficos-soportados-tipo-de-pluma" title="Permanent link">&para;</a></h3>
+<ul>
+<li>1 bit - <code>PEN_1BIT</code>- mono, utilizado para Pico Inky Pack y OLED I2C</li>
+<li>3 bits - <code>PEN_3BIT</code>- 8 colores, utilizado para Inky Frame</li>
+<li>4 bits - <code>PEN_P4</code>- Paleta de 16 colores</li>
+<li>8 bits - <code>PEN_P8</code>- Paleta de 256 colores</li>
+<li>RGB332 de 8 bits - <code>PEN_RGB332</code>- 256 colores fijos (3 bits de rojo, 3 bits de verde, 2 bits de azul)</li>
+<li>RGB565 de 16 bits - <code>PEN_RGB565</code>- 64K colores a costa de RAM. (5 bits rojos, 6 bits verdes, 5 bits azules)</li>
+<li>RGB888 de 24 bits: <code>PEN_RGB88816</code> 16 millones de colores a costa de mucha RAM. (8 bits rojos, 8 bits verdes, 8 bits azules)</li>
+</ul>
+<p>En la mayoría de los casos  es suficiente con utilizar <code>RGB332</code> que ofrece un buen equilibrio entre RAM y colores disponibles y además es el valor por defecto de las pantallas LCD a color. En el ejemplo vemos la manera por defecto de configuración y la manera explicita, que en este caso son idénticas.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span> <span class="o">=</span> <span class="n">PicoGraphics</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="n">PICO_DISPLAY</span><span class="p">)</span> <span class="c1"># por defecto</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">display</span> <span class="o">=</span> <span class="n">PicoGraphics</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="n">PICO_DISPLAY</span><span class="p">,</span> <span class="n">pen_type</span><span class="o">=</span><span class="n">PEN_RGB332</span><span class="p">)</span> <span class="c1">#explicita</span>
+</code></pre></div>
+<h3 id="rotaciones"><FONT COLOR=#AA0000>Rotaciones</font><a class="headerlink" href="#rotaciones" title="Permanent link">&para;</a></h3>
+<p>Las pantallas LED SPI admiten rotaciones de 0, 90, 180 y 270 grados y se realizan comovemos en el ejemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span> <span class="o">=</span> <span class="n">PicoGraphics</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="n">PICO_DISPLAY</span><span class="p">,</span> <span class="n">rotate</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="pines-personalizados"><FONT COLOR=#AA0000>Pines personalizados</font><a class="headerlink" href="#pines-personalizados" title="Permanent link">&para;</a></h3>
+<h4 id="spiparalelo"><FONT COLOR=#880088>SPI/paralelo</font><a class="headerlink" href="#spiparalelo" title="Permanent link">&para;</a></h4>
+<p>La biblioteca <code>pimoroni_bus</code> incluye <code>SPIBus</code> LCD SPI y <code>ParallelBus</code> LCD paralelo. Normalmente solamente tendremos que recurrir a usarlos si conectamos varias pantallas LCD. En el ejemplo vemos un bus SPI personalizado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">from</span> <span class="nn">pimoroni_bus</span> <span class="kn">import</span> <span class="n">SPIBus</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos="2 "></span></a><span class="kn">from</span> <span class="nn">picographics</span> <span class="kn">import</span> <span class="n">PicoGraphics</span><span class="p">,</span> <span class="n">DISPLAY_PICO_EXPLORER</span><span class="p">,</span> <span class="n">PEN_RGB332</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><a href="#__codelineno-3-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><a href="#__codelineno-3-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">busspi</span> <span class="o">=</span> <span class="n">SPIBus</span><span class="p">(</span><span class="n">cs</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">dc</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">sck</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">mosi</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><a href="#__codelineno-3-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><a href="#__codelineno-3-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">pantalla</span> <span class="o">=</span> <span class="n">PicoGraphics</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="n">DISPLAY_PICO_EXPLORER</span><span class="p">,</span> <span class="n">bus</span><span class="o">=</span><span class="n">busspi</span><span class="p">,</span> <span class="n">pen_type</span><span class="o">=</span><span class="n">PEN_RGB332</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="i2c"><FONT COLOR=#880088>I2C</font><a class="headerlink" href="#i2c" title="Permanent link">&para;</a></h4>
+<p>La biblioteca <code>pimoroni_i2c</code> incluye <code>PimoroniI2C</code> lo que se puede utilizar para cambiar los pines utilizados por una OLED mono:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos="1 "></span></a><span class="kn">from</span> <span class="nn">pimoroni_i2c</span> <span class="kn">import</span> <span class="n">PimoroniI2C</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos="2 "></span></a><span class="kn">from</span> <span class="nn">picographics</span> <span class="kn">import</span> <span class="n">PicoGraphics</span><span class="p">,</span> <span class="n">DISPLAY_I2C_OLED_128X128</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><a href="#__codelineno-4-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">busi2c</span> <span class="o">=</span> <span class="n">PimoroniI2C</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><a href="#__codelineno-4-5"><span class="linenos" data-linenos="5 "></span></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><a href="#__codelineno-4-6"><span class="linenos" data-linenos="6 "></span></a><span class="n">pantalla</span> <span class="o">=</span> <span class="n">PicoGraphics</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="n">DISPLAY_I2C_OLED_128X128</span><span class="p">,</span> <span class="n">bus</span><span class="o">=</span><span class="n">busi2c</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="funciones"><FONT COLOR=#007575><strong>Funciones</strong></font><a class="headerlink" href="#funciones" title="Permanent link">&para;</a></h2>
+<h3 id="generales"><FONT COLOR=#AA0000>Generales</font><a class="headerlink" href="#generales" title="Permanent link">&para;</a></h3>
+<h4 id="crear-y-configurar-plumas"><FONT COLOR=#880088>Crear y configurar plumas</font><a class="headerlink" href="#crear-y-configurar-plumas" title="Permanent link">&para;</a></h4>
+<p>Para crear una pluma para los modos RGB888, RGB565, RGB332, P8 y P4 creamos una instancia de pluma así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">mi_pluma</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">create_pen</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+</code></pre></div>
+<p>Para los modos RGB565 y RGB332 se indican los valores mediante RGB mediante números enteros que representan un color y retorna el resultado.</p>
+<p>Para los modos P4 y P8 se consume una entrada de paleta o retorna error si la paleta está llena. Los colores se almacenan como RGB y se convierten al mostrarse en pantalla.</p>
+<p>También es posible especificar un pluma a partir de valores HSV (Hue = Tono, Saturation = Saturación, Value = Valor) entre 0.0 y 1.0. Esto evita la necesidad de calcular el resultado RGB en Python.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">create_pen_hsv</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">V</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">mi_pluma</span><span class="p">)</span> <span class="c1"># para indicar a PicoGrphics que pluma usar</span>
+</code></pre></div>
+<p>Para los modos monocromáticos las plumas se manejan de forma un poco diferente dado que especificar un color RGB no tiene sentido. En lugar de esto se pueden indicar 16 tonos de gris que van desde 0 para el negro (o gris mas oscuro) hasta el 15 (o gris mas claro) para el blanco. Simplemente tenemos que invocar <code>set_pen</code> indicando el tono deseado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># negro</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="c1"># gris oscuro</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># gris claro</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><a href="#__codelineno-7-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># Blanco</span>
+</code></pre></div>
+<p>Debemos tener presente que los grises funcionan mezclando pixeles blancos y negros para simularlos por lo que detalles pequeños, texto, lineas o pixeles sueltos se verán como blancos o negros.</p>
+<p>Las pantallas Inky Frame admiten los siguientes:</p>
+<ul>
+<li>BLACK= 0</li>
+<li>WHITE= 1</li>
+<li>GREEN= 2</li>
+<li>BLUE= 3</li>
+<li>RED= 4</li>
+<li>YELLOW= 5</li>
+<li>ORANGE= 6</li>
+<li>TAUPE= 7 (limpieza de la pantalla)</li>
+</ul>
+<h4 id="luz-de-fondo"><FONT COLOR=#880088>Luz de fondo</font><a class="headerlink" href="#luz-de-fondo" title="Permanent link">&para;</a></h4>
+<p>Es posible configurar el brillo de la retroiluminación de la pantalla entre 0.0 y 1.0:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_backlight</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div>
+<p>Recordemos que esto no está disponible para la  pantalla montada en la placa Pico Explorer.</p>
+<h4 id="limites-de-dibujo"><FONT COLOR=#880088>Límites de dibujo</font><a class="headerlink" href="#limites-de-dibujo" title="Permanent link">&para;</a></h4>
+<p>Se trata de establecer los límites o recorte para dibujar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_clip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="c1"># coordenadas origen x,y y ancho y alto</span>
+</code></pre></div>
+<p>Eliminar los límites de recorte:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">remove_clip</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="limpiar"><FONT COLOR=#880088>Limpiar</font><a class="headerlink" href="#limpiar" title="Permanent link">&para;</a></h4>
+<p>Borra la pantalla al color de la pluma actual:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</code></pre></div>
+<p>Esto equivale a:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">get_bounds</span><span class="p">()</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><a href="#__codelineno-12-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+</code></pre></div>
+<p>Indicando que se pueden borrar partes de la pantalla con rectángulos para ahorrar tiempo y no tener que volver a dibujar elementos como archivos JPEG o gráficos.</p>
+<h4 id="actualizar"><FONT COLOR=#880088>Actualizar</font><a class="headerlink" href="#actualizar" title="Permanent link">&para;</a></h4>
+<p>Envía el contenido del buffer de Pico Grphics a la pantalla:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="limites"><FONT COLOR=#880088>Límites</font><a class="headerlink" href="#limites" title="Permanent link">&para;</a></h4>
+<p>Podemos utilizar <code>get_bounds()</code> para determinar el ancho y el alto de la pantalla.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">WIDTH</span><span class="p">,</span> <span class="n">HEIGHT</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">get_bounds</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="texto"><FONT COLOR=#AA0000>Texto</font><a class="headerlink" href="#texto" title="Permanent link">&para;</a></h3>
+<h4 id="cambiar-fuente"><FONT COLOR=#880088>Cambiar fuente</font><a class="headerlink" href="#cambiar-fuente" title="Permanent link">&para;</a></h4>
+<p>La sintaxis genérica es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_font</span><span class="p">(</span><span class="n">fuente</span><span class="p">)</span>
+</code></pre></div>
+<p>Las fuentes disponibles están divididas en dos grupos, las de mapa de bits y las vectoriales:</p>
+<p><strong>1.- Mapa de bits</strong>. Se alinean desde su esquina superior izquierda.</p>
+<blockquote>
+<ul>
+<li>bitmap6</li>
+<li>bitmap8</li>
+<li>bitmap14_outline</li>
+</ul>
+</blockquote>
+<p><strong>2.- Vectoriales</strong>. Se alinean horizontalmente respecto a su borde izquierdo y verticalmente respecto a su línea media. Cuando <code>scale=1</code>el borde superior de las letras mayúsculas está 10 pixeles mas arriba del <code>y</code> especificado y la línea base 10 pixeles por debajo.</p>
+<blockquote>
+<ul>
+<li>sans</li>
+<li>gothic</li>
+<li>cursive</li>
+<li>serif_italic</li>
+<li>serif</li>
+</ul>
+</blockquote>
+<h4 id="espesor"><FONT COLOR=#880088>Espesor</font><a class="headerlink" href="#espesor" title="Permanent link">&para;</a></h4>
+<p>De manera predeterminada las fuentes vectoriales tienen un grosor de un pixel, lo que genera texto muy fino y a veces ilegible. En la libreria tenemos el método <code>set_thickness</code> que permite cambiar el grosor de las líneas que configuran cada caracter de la fuente.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><a href="#__codelineno-16-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_thickness</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div>
+<p>Dibujar textos muy gruesos ralentiza mucho el dibujo de los caracteres.</p>
+<h4 id="dibujando-texto"><FONT COLOR=#880088>Dibujando texto</font><a class="headerlink" href="#dibujando-texto" title="Permanent link">&para;</a></h4>
+<p>Para escribir un texto hacemos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><a href="#__codelineno-17-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">wordwrap</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">spacing</span><span class="p">)</span>
+</code></pre></div>
+<p>Donde:</p>
+<ul>
+<li><code>text</code>- cadena de texto para dibujar</li>
+<li><code>x</code>- coordenada X</li>
+<li><code>y</code>- coordenada Y</li>
+<li><code>wordwrap</code>- número de píxeles de ancho antes de intentar dividir el texto en varias líneas</li>
+<li><code>scale</code>- tamaño</li>
+<li><code>angle</code>- ángulo de rotación (solo para vectoriales)</li>
+<li><code>spacing</code>- espaciado entre letras</li>
+<li><code>fixed_width</code>- espaciar todos los caracteres a la misma distancia (monoespaciado)</li>
+</ul>
+<p>La escala del texto puede ser un número entero (int) para fuentes de mapa de bits o un decimal (float) para fuentes vectoriales.</p>
+<p>El ejemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><a href="#__codelineno-18-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_font</span><span class="p">(</span><span class="s2">&quot;bitmap8&quot;</span><span class="p">)</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><a href="#__codelineno-18-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>Dibuja "Hello World" con la fuente bitmap8 de 16 píxeles de alto y escala 2x.</p>
+<p>A veces es posible que necesitemos medir la longitud de una cadena de texto para centrarla o alinearla en la pantalla; se puede hacer con:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><a href="#__codelineno-19-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">width</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">measure_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">fixed_width</span><span class="p">)</span>
+</code></pre></div>
+<p>La altura de cada fuente Bitmap está explícita en su nombre.</p>
+<p>Para escribir un solo carácter:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><a href="#__codelineno-20-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+</code></pre></div>
+<p>Se utiliza un <code>char</code> del <a href="https://es.wikipedia.org/wiki/ASCII">código ASCII</a> decimal. Tenemos que tener en cuenta que no todos los caracteres son compatibles.</p>
+<p>Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><a href="#__codelineno-21-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_font</span><span class="p">(</span><span class="s2">&quot;bitmap8&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><a href="#__codelineno-21-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="mi">38</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>Dibuja un signo ampersand (&amp;) en una versión escalada 2x de 16 píxeles de alto de la fuente 'bitmap8'.</p>
+<h3 id="formas-basicas"><FONT COLOR=#AA0000>Formas básicas</font><a class="headerlink" href="#formas-basicas" title="Permanent link">&para;</a></h3>
+<h4 id="linea"><FONT COLOR=#880088>Línea</font><a class="headerlink" href="#linea" title="Permanent link">&para;</a></h4>
+<p>Para dibujar una recta entre dos puntos dados usamos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><a href="#__codelineno-22-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+</code></pre></div>
+<p>Las coordenadas x1,y1 definen el punto de inicio y x2,y2 el punto final de la recta.</p>
+<p>Si necesitamos grosor en la línea mayor que el que tiene por defecto podemos hacer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><a href="#__codelineno-23-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">thickness</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="circulo"><FONT COLOR=#880088>Círculo</font><a class="headerlink" href="#circulo" title="Permanent link">&para;</a></h4>
+<p>Para dibujar un círculo hacemos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><a href="#__codelineno-24-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</code></pre></div>
+<p>Siendo el punto x,y el centro del círculo y 'r' su radio.</p>
+<h4 id="rectangulo"><FONT COLOR=#880088>Rectángulo</font><a class="headerlink" href="#rectangulo" title="Permanent link">&para;</a></h4>
+<p>Dibujamos un rectángulo haciendo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><a href="#__codelineno-25-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+</code></pre></div>
+<p>El rectángulo tiene un vértice en X,y a partir del cual se establecen el ancho (w) y el alto (h).</p>
+<h4 id="triangulo"><FONT COLOR=#880088>Triángulo</font><a class="headerlink" href="#triangulo" title="Permanent link">&para;</a></h4>
+<p>Se dibuja así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><a href="#__codelineno-26-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">triangle</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+</code></pre></div>
+<p>Cada par de coordenadas definen un vértice del triángulo.</p>
+<h4 id="poligono"><FONT COLOR=#880088>Polígono</font><a class="headerlink" href="#poligono" title="Permanent link">&para;</a></h4>
+<p>Para dibujar otras formas, podemos proporcionar una lista de puntos a <code>polygon</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><a href="#__codelineno-27-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">polygon</span><span class="p">([</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><a href="#__codelineno-27-2"><span class="linenos" data-linenos="2 "></span></a>  <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a><a href="#__codelineno-27-3"><span class="linenos" data-linenos="3 "></span></a>  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><a href="#__codelineno-27-4"><span class="linenos" data-linenos="4 "></span></a>  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><a href="#__codelineno-27-5"><span class="linenos" data-linenos="5 "></span></a>  <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><a href="#__codelineno-27-6"><span class="linenos" data-linenos="6 "></span></a>  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a><a href="#__codelineno-27-7"><span class="linenos" data-linenos="7 "></span></a>  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><a href="#__codelineno-27-8"><span class="linenos" data-linenos="8 "></span></a>  <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9"></a><a href="#__codelineno-27-9"><span class="linenos" data-linenos="9 "></span></a><span class="p">])</span>
+</code></pre></div>
+<h4 id="ejemplo-de-dibujo"><FONT COLOR=#880088>Ejemplo de dibujo</font><a class="headerlink" href="#ejemplo-de-dibujo" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><a href="#__codelineno-28-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="kn">from</span> <span class="nn">picographics</span> <span class="kn">import</span> <span class="n">PicoGraphics</span><span class="p">,</span> <span class="n">DISPLAY_PICO_EXPLORER</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><a href="#__codelineno-28-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><a href="#__codelineno-28-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">display</span> <span class="o">=</span> <span class="n">PicoGraphics</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="n">DISPLAY_PICO_EXPLORER</span><span class="p">)</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><a href="#__codelineno-28-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="n">BLANCO</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">create_pen</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><a href="#__codelineno-28-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">BLANCO</span><span class="p">)</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><a href="#__codelineno-28-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7"></a><a href="#__codelineno-28-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><a href="#__codelineno-28-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a><a href="#__codelineno-28-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10"></a><a href="#__codelineno-28-10"><span class="linenos" data-linenos="10 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">triangle</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a><a href="#__codelineno-28-11"><span class="linenos" data-linenos="11 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">polygon</span><span class="p">([</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12"></a><a href="#__codelineno-28-12"><span class="linenos" data-linenos="12 "></span></a>  <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13"></a><a href="#__codelineno-28-13"><span class="linenos" data-linenos="13 "></span></a>  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14"></a><a href="#__codelineno-28-14"><span class="linenos" data-linenos="14 "></span></a>  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<a id="__codelineno-28-15" name="__codelineno-28-15"></a><a href="#__codelineno-28-15"><span class="linenos" data-linenos="15 "></span></a>  <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16"></a><a href="#__codelineno-28-16"><span class="linenos" data-linenos="16 "></span></a>  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17"></a><a href="#__codelineno-28-17"><span class="linenos" data-linenos="17 "></span></a>  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+<a id="__codelineno-28-18" name="__codelineno-28-18"></a><a href="#__codelineno-28-18"><span class="linenos" data-linenos="18 "></span></a>  <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+<a id="__codelineno-28-19" name="__codelineno-28-19"></a><a href="#__codelineno-28-19"><span class="linenos" data-linenos="19 "></span></a><span class="p">])</span>
+<a id="__codelineno-28-20" name="__codelineno-28-20"></a><a href="#__codelineno-28-20"><span class="linenos" data-linenos="20 "></span></a><span class="c1"># Actualiza la pantalla</span>
+<a id="__codelineno-28-21" name="__codelineno-28-21"></a><a href="#__codelineno-28-21"><span class="linenos" data-linenos="21 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre></div>
+<p>El programa lo podemos descargar desde este <a href="../../programas/ejem_dibujos.py">enlace</a></p>
+<h3 id="pixeles"><FONT COLOR=#AA0000>Pixeles</font><a class="headerlink" href="#pixeles" title="Permanent link">&para;</a></h3>
+<p>Hacer tareas de dibujar o escribir pixel a pixel es lento y tedioso, pero a veces hay que utilizarlo y para ello tenemos dos opciones:</p>
+<ul>
+<li><strong>Pixel a pixel</strong>: <code>display.pixel(x,y)</code></li>
+<li><strong>Tramo horizontal de pixeles</strong>: display.pixel_span(x,y,longitud)</li>
+</ul>
+<p>En el ejemplo siguiente se utilizan ambas sentencias.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><a href="#__codelineno-29-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="kn">from</span> <span class="nn">picographics</span> <span class="kn">import</span> <span class="n">PicoGraphics</span><span class="p">,</span> <span class="n">DISPLAY_PICO_EXPLORER</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a><a href="#__codelineno-29-2"><span class="linenos" data-linenos=" 2 "></span></a>
+<a id="__codelineno-29-3" name="__codelineno-29-3"></a><a href="#__codelineno-29-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="n">display</span> <span class="o">=</span> <span class="n">PicoGraphics</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="n">DISPLAY_PICO_EXPLORER</span><span class="p">)</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a><a href="#__codelineno-29-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="n">BLANCO</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">create_pen</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5"></a><a href="#__codelineno-29-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">BLANCO</span><span class="p">)</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6"></a><a href="#__codelineno-29-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="c1"># dibujo de 4 pixeles contiguos para que se aprecien bien</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7"></a><a href="#__codelineno-29-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8"></a><a href="#__codelineno-29-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9"></a><a href="#__codelineno-29-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10"></a><a href="#__codelineno-29-10"><span class="linenos" data-linenos="10 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11"></a><a href="#__codelineno-29-11"><span class="linenos" data-linenos="11 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">pixel_span</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">80</span><span class="p">)</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12"></a><a href="#__codelineno-29-12"><span class="linenos" data-linenos="12 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="gestion-de-paletas"><FONT COLOR=#AA0000>Gestion de paletas</font><a class="headerlink" href="#gestion-de-paletas" title="Permanent link">&para;</a></h3>
+<p>Los modos P4 y P8 tienen paletas de 16 y 256 colores respectivamente. Se definen colores en la paleta a partir de una lista de tuplas RGB.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><a href="#__codelineno-30-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">set_palette</span><span class="p">([</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a><a href="#__codelineno-30-2"><span class="linenos" data-linenos="2 "></span></a>  <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><a href="#__codelineno-30-3"><span class="linenos" data-linenos="3 "></span></a>  <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a><a href="#__codelineno-30-4"><span class="linenos" data-linenos="4 "></span></a>  <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a><a href="#__codelineno-30-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">])</span>
+</code></pre></div>
+<p>Es posible modificar la paleta en un color dado redifiniendo el RGB por su índice:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><a href="#__codelineno-31-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">update_pen</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+<p>Para restablecer una pluma a su valor predeterminado hacemos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><a href="#__codelineno-32-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">display</span><span class="o">.</span><span class="n">reset_pen</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</code></pre></div>
+<p>Para convertir entre formatos de color tenemos:</p>
+<ul>
+<li><code>RGB332_to_RGB</code></li>
+<li><code>RGB_to_RGB332</code></li>
+<li><code>RGB565_to_RGB</code></li>
+<li><code>RGB_to_RGB565</code></li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 - 2035 Federico Coca
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://x.com/fgcoca" target="_blank" rel="noopener" title="X de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/fgcoca" target="_blank" rel="noopener" title="Github de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.instagram.com/cocafederico/?hl=es" target="_blank" rel="noopener" title="Instagram de Federico Coca" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://x.com/clubroboticagra" target="_blank" rel="noopener" title="X de Club Robótica Granada" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="../../plugins/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>

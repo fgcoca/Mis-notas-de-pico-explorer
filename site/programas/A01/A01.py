@@ -1,6 +1,6 @@
 from machine import Pin
 import time
-
+print(machine.freq())
 # Comentar una de las lineas y descomentar la otra segun version de Pico
 
 # led = Pin(25, Pin.OUT)   # LED en la Pi Pico

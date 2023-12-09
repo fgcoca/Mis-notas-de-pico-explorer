@@ -17,6 +17,10 @@
 
 * Guia oficial de Raspberry Pi Pico: [Get started with MicroPython on Raspberry Pi Pico](https://hackspace.raspberrypi.com/books/micropython-pico)
 
+* [El libro de Python](https://ellibrodepython.com/)
+
+* [Tutorial de Python de The Data Schools](https://thedataschools.com/python/)
+
 * [Raspberry Pi Pico Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf)
 
 * [Blog original no oficial de Raspberry Pi](https://www.raspberrypi-spy.co.uk/)
