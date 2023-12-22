@@ -43,6 +43,21 @@ Antes de utilizar el módulo ```time``` tenemos que añadir la sentencia ```impo
 * **time.ticks_add(ticks, delta)**. Obtiene la marca de tiempo después del desfase, donde **ticks** puede indicarse con **ticks_ms()**,**ticks_us()** o **ticks_cpu()** y **delta** puede ser cualquier entero o expresión numérica.
 * **time.ticks_diff(old_t, new_t)**. Calcula la diferencia de tiempo entre las dos marcas temporales que pueden indicarse con **ticks_ms()**,**ticks_us()** o **ticks_cpu()**. El tiempo de inicio se indica con **old_t** y el de finalización con **new_t**.
 
+<div class="cuadrado">
+
+Usualmente en Python se acostumbra a usar la biblioteca <i><b>time</b></i>. La biblioteca <i><b>utime</b></i> es una versión diseñada para microcontroladores como el de la Pi Pico. La 'u' inicial sustituye a la letra guiega 'μ' (mu), que se utiliza habitualmente como abreviatura de 'micro'. Si nos olvidamos de este detalle y utilizamos <b><i>import time</b></i>, no debemos preocuparnos, MicroPython utilizará automáticamente la biblioteca <i><b>utime</b></i> en su lugar.    
+
+</div>
+<style>
+.cuadrado{
+padding:20px;
+margin:10px;
+background-color: #FFFFDD;
+border: solid 3px #FF00FF;
+color: black;
+}
+</style>
+
 ## <FONT COLOR=#007575>**Clase ```Pin(id, mode, pull, value)```**</font>
 Un objeto pin se utiliza para controlar los pines de E/S (también conocidos como GPIO - entrada/salida de propósito general). Los objetos pin están comúnmente asociados con un pin físico que puede establecer un nivel de tensión de salida y leer tensiones de entrada. La clase pin tiene métodos para establecer el modo del pin (IN, OUT, etc) y métodos para obtener y establecer el nivel lógico digital. Para el control analógico de un pin, se utiliza la clase ADC.
 
@@ -127,3 +142,109 @@ La clase tiene disponibles los siguientes métodos:
 * **PWM.freq([value])**. Obtiene o ajusta la frecuencia actual de la salida PWM. Sin argumentos devuelve la frecuencia en Hz. Con un único argumento de ```value```, la frecuencia se ajusta a ese valor en Hz. El método puede generar un ValueError si la frecuencia está fuera del rango válido.
 * **PWM.duty_u16([value])**. Obtiene o establece el ciclo de trabajo actual de la salida PWM, como un valor de 16 bits sin signo en el rango de 0 a 65535 inclusive. Sin argumentos devuelve el ciclo de trabajo. Con un argumento de ```value``` único, el ciclo de trabajo se establece en ese valor, medido como la relación entre value/65535.
 * **PWM.duty_ns**. Obtiene o establece el ancho de pulso actual de la salida PWM, como un valor en nanosegundos. Sin argumentos devuelve el ancho de pulso en nanosegundos. Con un único argumento de value, el ancho de pulso se establece en ese valor.
+
+## <FONT COLOR=#007575>**El módulo random**</font>
+Aunque no se trata de una clase en si mismo, lo vamos a ver en esta sección.
+
+El módulo implementa generadores de números pseudoaleatorios y este es su código fuente: [łib/random.py](https://github.com/python/cpython/blob/3.10/Lib/random.py).
+
+Antes de cada uso del módulo random, hay que añadir la declaración ```import random``` al principio del archivo Python.
+
+Tenemos disponibles las siguientes opciones:
+
+* **```randint(inicio, fin)```**: Genera aleatoriamente un número entero entre los valores inicial y final.
+
+>
+  - **inicio**: Valor inicial en el rango especificado, que se incluiría en el rango.
+  - **fin**: Valor final en el rango especificado, que se incluiría en el rango.
+  - **random()**: Genera aleatoriamente un número de coma flotante entre 0 y 1.
+
+* **```random.uniform(inicio, fin)```**: Genera aleatoriamente un número de coma flotante entre los valores inicial y final.
+
+>
+  - **inicio**: Valor inicial en el rango especificado, que se incluiría en el rango.
+  - **fin**: Valor final en el rango especificado, que se incluiría en el rango.
+
+* **```random.getrandbits(size)```**: Genera un aleatorio entero del tamaño especificado por ```size```.
+
+Por ejemplo:
+
+si size = 4, se genera un entero en el rango de 0 a 0b1111, o sea entre 0 y 15.
+    
+si size = 8, se genera un entero en el rango de 0 a 0b11111111, o sea entre 0 y 255.
+
+* **```random.randrange(inicio, fin, paso)```**: Genera aleatoriamente un entero positivo en el rango de inicio a fin que se incrementa según el valor de paso.
+
+>
+  - **inicio**: Valor inicial en el rango especificado, que se incluiría en el rango.
+  - **fin**: Valor final en el rango especificado, que se incluiría en el rango.
+  - **paso**: Un número entero que especifica el incremento.
+
+* **```random.seed(sed)```**: Especifica una semilla aleatoria, que suele aplicarse junto con otros generadores de números aleatorios.
+
+>
+  - **sed**: Semilla aleatoria, un punto de partida en la generación de números aleatorios.
+
+* **```random.choice(obj)```**: Genera aleatoriamente un elemento a partir del dato ```obj```.
+
+## <FONT COLOR=#007575>**```neopixel``` — control of WS2812 **</font>
+Es un módulo que contiene los drivers para LED RGB direccionables WS2812 para puertos RP2.
+
+La clase ```NeoPixel``` almacena los datos de los píxeles de una tira de LED WS2812 conectada a un pin. La aplicación debe establecer los datos de los píxeles y al final llamar a NeoPixel.write() cuando estemos listos para actualizar la tira.
+
+La clase tiene el siguiente constructor:
+
+* **classneopixel.NeoPixel(pin, n, *, bpp=3, timing=1)**. Siendo ```pin``` el número de pin al que se conecta, ```n``` el número de diodos, ```bpp``` vale 3 para diodos RGB y 4 para RGBW y ```timing``` se pone a '0' para 400kHz y a '1' para 800kHZ.
+
+Veamos los métodos de acceso a cada pixel:
+
+* **NeoPixel.fill(pixel)**. Establece el valor de todos los píxeles al valor de píxel especificado (es decir, una tupla RGB/RGBW).
+* **NeoPixel.__len__()**. Devuelve el número de LEDs de la tira.
+* **NeoPixel.__setitem__(index, val)**. Establece el valor ```val``` en el píxel indicado por ```index```.
+* **NeoPixel.__getitem__(index)**. Devuelve el píxel de ```index``` como una tupla RGB/RGBW.
+
+El método de salida es:
+
+* **NeoPixel.write()**. Escribe los datos actuales de los píxeles en la tira.
+
+Los neopixeles, también conocidos como LEDs WS2812, son LEDs que se conectan en serie, y que son direccionables individualmente y pueden tener sus componentes rojo, verde y azul ajustados entre 0 y 255. Requieren una temporización precisa para controlarlos y existe un módulo especial para ello.
+
+Para crear un objeto NeoPixel hacemos lo siguiente:
+
+~~~py
+import machine, neopixel
+np = neopixel.NeoPixel(machine.Pin(4), 8)
+~~~
+
+Para establecer el color de los pixeles:
+
+~~~py
+np[0] = (255, 0, 0) # Rojo, brillo maximo
+np[1] = (0, 128, 0) # Verde, brillo medio
+np[2] = (0, 0, 64)  # Azul, un cuarto de brillo
+~~~
+
+Al final usamos el método ```write()``` para establecer los colores:
+
+~~~py
+np.write()
+~~~
+
+En el ejemplo se dibujan los colores del arcoiris:
+
+~~~py
+import machine, neopixel
+np = neopixel.NeoPixel(machine.Pin(0), 8)
+
+# Arco iris
+np[0] = (255, 0, 255)
+np[1] = (255, 255, 0)
+np[2] = (255, 128, 0)
+np[3] = (0, 128, 0) 
+np[4] = (255, 0, 0) 
+np[5] = (0, 0, 64)
+np[6] = (150, 255, 50) 
+np[7] = (0, 255, 255) 
+
+np.write()
+~~~

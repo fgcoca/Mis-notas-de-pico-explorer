@@ -36,21 +36,24 @@ nav:
     - Inicio con Raspberry Pi Pico: inicio/inicio_pi_pico.md
     - La Pi Pico y Pico W: inicio/pi_pico_picoW.md
     - Como comenzar: inicio/inicio.md
+    - Modelos de color:
+      - RGB: inicio/RGB.md
+      - HSL: inicio/HSL.md
   - Firmware y software:
-    - Firmware: up/firm.md
+    - Firmware Pimoroni: up/firm.md
+    - Firmware Micropython: up/firmo.md
     - Software Thonny: up/soft.md
   - Python:
     - Introducción: guias/intro.md
     - Permisos en Linux: guias/permisos.md
     - Sintaxis en Python: guias/sintaxis.md
     - Datos en Python: guias/datos.md
+    - Constantes y variables en Python: guias/variables.md
     - Estructuras de datos en Python: guias/estr_datos.md
     - Operadores en Python: guias/operaradores.md
     - Estructuras de control: guias/control.md
     - Programacion Orientada a Objetos: guias/poo.md
-    - Módulos: 
-      - Módulos en Python: guias/modulos.md
-      - Módulo random: guias/rand.md
+    - Módulos: guias/modulos.md
   - MicroPython:
     - Funciones de referencia de la placa Pico Explorer: upy/func_ref.md
     - La libreria PicoGrphics: upy/picographics.md
@@ -65,7 +68,11 @@ nav:
     - Actividad A05: actividades/A05.md
     - Actividad A06: actividades/A06.md
     - Actividad A07: actividades/A07.md
-  # Aqui todas las entradas
+    - Actividad A08: actividades/A08.md
+    - Actividad A09: actividades/A09.md
+  - Proyectos de computación física:
+    - Introducción: proyectos/intro.md
+    - Semáforo: proyectos/semaforo.md
   - Miscelanea:
     - Autor: Miscelanea/about.md 
     - Licencias: Miscelanea/lic.md

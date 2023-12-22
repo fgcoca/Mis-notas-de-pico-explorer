@@ -19,6 +19,8 @@
 
 * [El libro de Python](https://ellibrodepython.com/)
 
+* Libro **Get started with MicroPython on Raspberry Pi Pico** de Gareth Halfacree y Ben Everard cuyo contenido está licenciado bajo Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+
 * [Tutorial de Python de The Data Schools](https://thedataschools.com/python/)
 
 * [Raspberry Pi Pico Python SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-python-sdk.pdf)

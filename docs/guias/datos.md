@@ -79,3 +79,4 @@ Estudiaremos estos últimos tipos mas extensamente cuando los necesitemos.
 Los datos de tipo booleano solamente pueden contener ```True``` o ```False```.
 
 Dado que en programación Python todo es un objeto, los tipos de datos son en realidad clases y las variables son instancias(objeto) de estas clases.
+
